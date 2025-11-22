@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="estilo.css" rel="stylesheet" type="text/css" />
+<title>Documento sin t&iacute;tulo</title>
+</head>
+
+<body>
+<h1>Algoritmo DFS (Depth First Search)</h1>
+<h2>Accesibilidad</h2>
+<p>Sea G=(V,E) grafo dirigido o grafo no dirigido:</p>
+<p>Se dice que el vértice u  alcanza al vértice v en G si u=v o existe una cadena de u a v.</p>
+<p>Se entiende por tanto que cada vértice se alcanza a sí mismo.</p>
+<h2>Matriz de Acceso</h2>
+<p>La matriz de acceso de G es la matriz nxn A=a<span class="subindice">ij</span>, donde:</p>
+<p>a<span class="subindice">ij</span> = 1, si el vértice v<span class="subindice">i</span> alcanza al vértice v<span class="subindice">j</span></p>
+<p>a<span class="subindice">ij</span> = 0, si el vértice v<span class="subindice">i</span> no alcanza al vértice v<span class="subindice">j</span></p>
+<p>Todos los elementos de la diagonal principal de la matriz valen 1 (cada vértice se alcanza a sí mismo).</p>
+<h2>¿Cómo se obtiene la matriz de acceso?</h2>
+<p>Sea G=(V,E) grafo</p>
+<p>La matriz de acceso de G se puede obtener a partir de la aplicación reiterada de los conocidos métodos:</p>
+<ul>
+  <li>Búsqueda en anchura (BFS)</li>
+  <li>Búsqueda en profundidad (DFS)</li>
+</ul>
+<p>Concretamente, cada una de las filas, i, i = 1, 2, .... , n, de la matriz de acceso se obtiene por aplicación de uno de los dos métodos mencionados al vértice v<span class="subindice">i</span>. En el caso de grafos no dirigidos, dado que si u alcanza a v entonces v  alcanza a u, bastará con: aplicar el algoritmo a un vértice cualquiera y  después ir aplicando reiteradamente el algoritmo a vértices que no hayan  aparecido como alcanzados en iteraciones anteriores.</p>
+<p>Los algoritmos sirven tanto para <strong>grafos dirigidos</strong> como <strong>grafos no dirigidos</strong>.</p>
+<h2>Algoritmo de Búsqueda en profundidad</h2>
+<p>Sea G=(V,E) grafo. Considera un vértice de G, v.</p>
+<p>1. Crea dos listas vacías L y A, y una pila vacía P.</p>
+<p>2. Elige un vértice v y añádelo a L y a P *.</p>
+<p>3. Sea w el elemento más alto de la pila P.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;Si existe un vértice  w’ que no esté en L y (w,w’) existe en E , añádelo a P y a L, y añade a A la arista/arco (w,w’) </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;En caso contrario elimina w de P.</p>
+<p>4. Repite el paso 3 hasta que la pila P esté vacía.</p>
+<p>* Los elementos se ponen en la parte alta de la pila </p>
+<p>&nbsp;</p>
+</body>
+</html>

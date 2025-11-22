@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="estilo.css" rel="stylesheet" type="text/css" />
+<title>Kruskal</title>
+</head>
+
+<body>
+<h1>Algoritmo KRUSKAL</h1>
+<h2>Árbol de expansión mínima, también llamado árbol generador de mínimo coste.</h2>
+<h3>Restricciones:</h3>
+<p>Este algoritmo sólo se puede aplicar a grafos no dirigidos.</p>
+<h2>Conceptos previos</h2>
+<h3>Árbol</h3>
+<p>Se llama árbol a todo grafo no dirigido conexo acíclico.</p>
+<p>NOTA:  Recordemos que un bucle es una arista en la que los dos extremos coinciden y  que un grafo se dice simple sino posee bucles.</p>
+<p>En caso de haber más de un vértice la definición anterior es equivalente a cada uno de los siguientes grupos de condiciones.</p>
+<p class="subrayado">Caracterización</p>
+<p>Si G es un árbol con más de un vértice los siguientes grupos de condiciones son equivalentes:</p>
+<ul>
+  <li>G es árbol</li>
+  <li>G es simple y existe un único camino entre cada dos vértices distintos</li>
+  <li>G es conexo y |E| = |V| -1</li>
+  <li>G es acíclico y |E| = |V| -1</li>
+</ul>
+<p><img src="img/arbol1.jpg" alt="arbol" width="366" height="209" /></p>
+<p>La longitud o coste del árbol es la suma de los pesos de las aristas del árbol.</p>
+<h3>Árbol generador de mínimo coste</h3>
+<p>Sea G un grafo no dirigido conexo ponderado G=(V,E).</p>
+<p>Se llama árbol generador de G a todo subgrafo generador que sea conexo y acíclico.</p>
+<p>NOTA:  Recordemos que un subgrafo G’ de G es subgrafo generador de G si los conjuntos  de vértices de G y G’ coinciden.</p>
+<p>Se llama árbol generador de mínimo coste de G (o de expansión mínima) a todo árbol generador de G cuyo coste sea menor o igual que el de cualquier otro árbol generador de G.</p>
+<p>El árbol generador de mínimo coste de un grafo dado G no tiene porqué ser único.</p>
+<p>Para determinar el árbol generador de mínimo coste se utiliza el algoritmo de Kruskal. </p>
+<h2>Algoritmo de Kruskal</h2>
+<p>Sea G un grafo no dirigido ponderado, el algoritmo de Kruskal proporciona un árbol generador de mínimo coste.</p>
+<p>Si los pesos son distintos dos a dos el árbol generador de mínimo coste es único. </p>
+<h3>Algoritmo</h3>
+<p>Se trata de un algoritmo sencillo que se aplica según los siguientes pasos:</p>
+<p><strong>Paso 1:</strong> Se selecciona, de manera arbitraria, cualquier nodo y se conecta (se selecciona la arista) al nodo más cercano (menor coste) distinto de éste.</p>
+<p><strong>Paso 2:</strong> Se identifica el nodo no conectado más cercano a un nodo conectado, y se conectan estos dos nodos.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Si hay nodos sin conectar, ir al Paso 2.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;en otro caso, FIN</p>
+<p>Los empates para el nodo más cercano distinto (paso 1) o para el nodo no conectado más cercano (paso2), se pueden resolver de forma arbitraria y el algoritmo conduce a una solución óptima. No obstante, estos empates son indicativos de que pueden existir (aunque no necesariamente) soluciones óptimas alternativas. </p>
+<p>Todas esas soluciones se pueden identificar si se analizan las distintas formas de resolver los empates hasta el final.</p>
+<p>&nbsp;</p>
+</body>
+</html>

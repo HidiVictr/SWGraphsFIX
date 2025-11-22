@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="estilo.css" rel="stylesheet" type="text/css" />
+<title>Documento sin t&iacute;tulo</title>
+</head>
+
+<body>
+<h1>Algoritmo Edmonds 2</h1>
+<h3>Restricciones:</h3>
+<p>Este algoritmo sólo se puede aplicar a grafos no dirigidos y sin bucles.</p>
+<p>NOTA:  Recordemos que un bucle es una arista en la que los dos extremos coinciden. </p>
+<h2>Conceptos previos</h2>
+<p>Sea G=(V,E) grafo no dirigido llamamos:</p>
+<p><strong><span class="subrayado">Emparejamiento:</span></strong> subconjunto de E, M, en el que no hay dos aristas que sean adyacentes y ninguna es un bucle.</p>
+<p><strong class="subrayado">Vértice M-saturado:</strong> vértice que posee una arista de M incidente en él. En caso contrario se dice que el vértice es M-insaturado.</p>
+<p><strong class="subrayado">Emparejamiento máximo:</strong> emparejamiento tal que no existe ningún otro emparejamiento con mayor número de aristas.</p>
+<p><strong class="subrayado">Emparejamiento perfecto:</strong> emparejamiento en el que todos los vértices son M-saturados.</p>
+<p class="subrayado">Ejemplo:</p>
+<p><img src="img/ejemploemparejamientos.jpg" alt="emparejamiento" width="300" height="200" /></p>
+<p>Sea G el grafo de la figura:</p>
+<p>M1 = {(2,3), (6,7)} es un  emparejamiento.</p>
+<p>Los vértices 2,3,6,7 son M1-saturados, los restantes  son M1-insaturados.</p>
+<p>M1 no es máximo ya que M2 = {(1,7), (5,6), (2,3)} es también emparejamiento y |M1| &lt; |M2|.</p>
+<p>M2 es máximo puesto que |V| = 7 y |M2| = 3 pero no es perfecto, porque el número de vértices es impar y por lo tanto siempre habrá un vértice M-insaturado.</p>
+<p><br />En muchas ocasiones, dado un grafo no dirigido ponderado G=(V,E), es interesante conocer no sólo un emparejamiento máximo o perfecto si existe, sino de estos el que más pese, entendiendo por peso del emparejamiento la suma de los pesos de las aristas que lo forman. Por ello introducimos los siguientes conceptos.</p>
+<p>Sea G=(V,E) grafo no dirigido y M emparejamiento en G. Llamamos:</p>
+<p><strong class="subrayado">Emparejamiento máximo de máximo peso:</strong> todo emparejamiento máximo de G tal que el peso de cualquier otro emparejamiento M1 sea menor o igual que el de M. En caso de que el emparejamiento máximo de máximo peso sea además perfecto, se llama emparejamiento óptimo.</p>
+<p><strong class="subrayado">Camino M-alternado:</strong> camino en G cuyas aristas pertenecen alternativamente a M y E-M.</p>
+<p><strong class="subrayado">Camino M-incrementable:</strong> camino M-alternado en G cuyos extremos son M-insaturados.</p>
+<p><span class="subrayado">Ejemplo:</span> En el grafo anterior</p>
+<p><img src="img/m1-1.jpg" alt="incrementable" width="200" height="100" /></p>
+<p>Es M1-alternado. No es M1-incrementable.</p>
+<h2>Algoritmo</h2>
+<p>El algoritmo de Edmonds 2 obtiene un acoplamiento (emparejamiento) de máxima cardinalidad y peso máximo o mínimo en el grafo dado.</p>
+<p>Durante su ejecución se emplean distintas estructuras del contexto de la Teoría de Grafos, como son el subgrafo 
+  igualdad y el árbol alternado.</p>
+<p>En esta aplicación los arboles alternados emplean la siguiente representación:</p>
+<ul>
+  <li>Nodos E = Contorno rojo (relleno de rojo si es el nodo E activo en ese paso, en rojo más oscuro se representa el nodo raíz)</li>
+  <li>Nodos I = Contorno azul</li>
+</ul>
+<h2>Opciones:</h2>
+<p><strong>Maximizar - Minimizar:</strong> Permite elegir que emparejamiento (acoplamiento) se buscará, el de máximo peso o el de mínimo peso; esta opción se aplica al iniciar el algoritmo, por lo que cualquier modificación durante el trascurso del mismo no tendrá ningún valor. </p>
+<p>&nbsp;</p>
+</body>
+</html>

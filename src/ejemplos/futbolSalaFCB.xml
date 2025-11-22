@@ -1,0 +1,182 @@
+<?xml version="1.0" standalone="yes" ?>
+<grafo>
+<tipoGrafo> "0" </tipoGrafo>
+<nodos><nodo>
+<nombre> "portero" </nombre>
+<posicion> (80,50) </posicion>
+</nodo>
+<nodo>
+<nombre> "cierre" </nombre>
+<posicion> (80,125) </posicion>
+</nodo>
+<nodo>
+<nombre> "ala izquierda" </nombre>
+<posicion> (80,200) </posicion>
+</nodo>
+<nodo>
+<nombre> "ala derecha" </nombre>
+<posicion> (80,275) </posicion>
+</nodo>
+<nodo>
+<nombre> "pivot" </nombre>
+<posicion> (80,350) </posicion>
+</nodo>
+<nodo>
+<nombre> "Cristian Dominguez" </nombre>
+<posicion> (400,5) </posicion>
+</nodo>
+<nodo>
+<nombre> "Antolín" </nombre>
+<posicion> (400,40) </posicion>
+</nodo>
+<nodo>
+<nombre> "Jesús Aicardo" </nombre>
+<posicion> (400,75) </posicion>
+</nodo>
+<nodo>
+<nombre> "Jordi Torras" </nombre>
+<posicion> (400,110) </posicion>
+</nodo>
+<nodo>
+<nombre> "Ari Santos" </nombre>
+<posicion> (400,145) </posicion>
+</nodo>
+<nodo>
+<nombre> "Gabriel Da Silva" </nombre>
+<posicion> (400,180) </posicion>
+</nodo>
+<nodo>
+<nombre> "Saad Assis" </nombre>
+<posicion> (400,215) </posicion>
+</nodo>
+<nodo>
+<nombre> "Igor De Souza" </nombre>
+<posicion> (400,250) </posicion>
+</nodo>
+<nodo>
+<nombre> "Ángel Velasco" </nombre>
+<posicion> (400,285) </posicion>
+</nodo>
+<nodo>
+<nombre> "Fernandao" </nombre>
+<posicion> (400,355) </posicion>
+</nodo>
+<nodo>
+<nombre> "Sergio Lozano" </nombre>
+<posicion> (400,390) </posicion>
+</nodo>
+<nodo>
+<nombre> "Wilde Gomes" </nombre>
+<posicion> (400,320) </posicion>
+</nodo>
+</nodos>
+<aristas><arista>
+<nodo1> "0" </nodo1>
+<nodo2> "5" </nodo2>
+<peso> "8.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "0" </nodo1>
+<nodo2> "6" </nodo2>
+<peso> "6.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "1" </nodo1>
+<nodo2> "7" </nodo2>
+<peso> "5.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "1" </nodo1>
+<nodo2> "8" </nodo2>
+<peso> "7.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "1" </nodo1>
+<nodo2> "9" </nodo2>
+<peso> "6.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "2" </nodo1>
+<nodo2> "8" </nodo2>
+<peso> "4.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "2" </nodo1>
+<nodo2> "10" </nodo2>
+<peso> "7.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "2" </nodo1>
+<nodo2> "11" </nodo2>
+<peso> "7.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "2" </nodo1>
+<nodo2> "12" </nodo2>
+<peso> "9.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "2" </nodo1>
+<nodo2> "13" </nodo2>
+<peso> "5.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "3" </nodo1>
+<nodo2> "10" </nodo2>
+<peso> "9.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "3" </nodo1>
+<nodo2> "11" </nodo2>
+<peso> "7.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "3" </nodo1>
+<nodo2> "12" </nodo2>
+<peso> "8.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "3" </nodo1>
+<nodo2> "13" </nodo2>
+<peso> "6.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "4" </nodo1>
+<nodo2> "12" </nodo2>
+<peso> "7.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "4" </nodo1>
+<nodo2> "14" </nodo2>
+<peso> "8.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "4" </nodo1>
+<nodo2> "15" </nodo2>
+<peso> "9.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+<arista>
+<nodo1> "4" </nodo1>
+<nodo2> "16" </nodo2>
+<peso> "7.0" </peso>
+<tipo> "0" </tipo>
+</arista>
+</aristas> 
+ </grafo>

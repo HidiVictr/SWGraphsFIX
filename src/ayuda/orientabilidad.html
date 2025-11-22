@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="estilo.css" rel="stylesheet" type="text/css" />
+<title>Orientar grafo</title>
+</head>
+
+<body>
+<h2>ORIENTABILIDAD</h2>
+<p>Sea G = (V,E) un grafo no dirigido, se dice que <strong>G es orientable</strong> si podemos asignar un sentido a cada una de sus aristas de manera que el grafo dirigido resultante sea fuertemente conexo.</p>
+<h3>Teorema de Robbins</h3>
+<p>Un grafo no dirigido es orientable si y sólo si es conexo y no tiene puentes.</p>
+<h2>Algoritmo</h2>
+<p>Sea G grafo no dirigido, conexo, sin puentes</p>
+<p>El siguiente procedimiento proporciona una orientación en G</p>
+<p>PASO 1. Consideramos todos los vértices.</p>
+<p>PASO 2. Elegimos uno cualquiera, por ejemplo v1.</p>
+<p>PASO 3. Aplicamos el algoritmo DFS a v1.</p>
+<p>Cada vez que al aplicar este algoritmo se alcance un vértice u, se le asignará a este una etiqueta que indique si es el primero, segundo, … que se alcanza y se orientará la arista que alcanza a u de forma que dicho vértice  u sea el extremo final.</p>
+<p>PASO 4. Consideramos una a una las aristas que no han sido orientadas (no han intervenido en la aplicación del DFS).</p>
+<p>Sea (u,v) una de estas aristas.</p>
+<p>Si la etiqueta de u es menor que la de v, orientamos (u,v) de v hacia u.</p>
+<p>Si la etiqueta de u es mayor que la de v, orientamos (u,v) de u hacia v.</p>
+<p>&nbsp;</p>
+</body>
+</html>

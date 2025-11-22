@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="estilo.css" rel="stylesheet" type="text/css" />
+<title>Kruskal</title>
+</head>
+
+<body>
+<h1>Algoritmo Ciclo Hamiltoniano</h1>
+<h3>Restricciones:</h3>
+<p>Este algoritmo sólo se puede aplicar a grafos no dirigidos, simples, con pesos positivos y con almenos 3 nodos para que pueda existir un ciclo hamiltoniano.</p>
+<h2>Conceptos previos</h2>
+<p>Sea G=(V,E) un grafo no dirigido, |V|=n</p>
+<p><span class="subrayado">Camino hamiltoniano:</span> todo camino P en G que contenga a todos los vértices del grafo.</p>
+<p><span class="subrayado">Ciclo hamiltoniano:</span> todo ciclo C de G que contenga todos los vértices de G.</p>
+<p><span class="subrayado">Grafo hamiltoniano:</span> grafo que contiene un ciclo hamiltoniano.</p>
+<h2>Ciclo hamiltoniano de 'bajo' peso</h2>
+Sea G=(V,E) grafo no dirigido.<br />
+<br />
+Se dice que C<span class="subindice">HB</span> es un ciclo hamiltoniano de <strong>bajo peso</strong> en G si es un ciclo hamiltoniano tal que <br />
+p(C<span class="subindice">HB</span>) ≤ 2 p(C<span class="subindice">HM</span>) donde C<span class="subindice">HM</span> es un ciclo hamiltoniano de mínimo peso.<br />
+<br />
+Tanto el algoritmo basado en el árbol generador de mínimo coste, como el algoritmo voraz, permiten obtener un ciclo con estas características. Pero cuidado, para que sea posible su aplicación el grafo debe cumplir las siguientes condiciones:<br />
+<ul>
+  <li>G = (V,E) completo, |V| &gt;= 3, ponderado positivo</li>
+  <li>G verifica la desigualdad triangular, es decir, p(v<span class="subindice">i</span>,v<span class="subindice">j</span>) ≤ p(v<span class="subindice">i</span>,v<span class="subindice">k</span>) + p(v<span class="subindice">k</span>,v<span class="subindice">j</span>)</li>
+</ul>
+<p>Se dice que un grafo ponderado, donde p(u,v) representa el peso de la arista (u,v),  <strong>verifica  la desigualdad triangular</strong> si <img src="img/paratot.png" alt="paratodo" width="21" height="22" />   u, v, w <img src="img/pertenece.png" alt="de" width="18" height="16" /> V  p(u,v) + p(v,w) &gt;= p(u,w)</p>
+<h3>Algoritmo basado en el árbol generador</h3>
+<p>1.- Obtener el árbol generador de mínimo coste (T)</p>
+<p>Aplicar Kruskal a G para obtener T</p>
+<p>2.- Encontrar ciclo euleriano dirigido C<span class="subindice">E</span></p>
+<p>2.1.- Considerar el árbol como un grafo dirigido (i.e. por cada arista (x,y) con peso p(x,y) de G, se consideran dos arcos (x,y) e (y,x) ponderados, ambos, con p(x,y)</p>
+<p>2.2.- Encontrar un ciclo euleriano para el grafo dirigido</p>
+<p>Aplicar algoritmo de Hierholzer</p>
+<p>3.- Obtener ciclo hamiltoniano a partir de C<span class="subindice">E</span>, eliminando los nodos repetidos del ciclo euleriano.</p>
+<p>Se obtiene un <span class="subrayado">ciclo hamiltoniano de bajo peso</span></p>
+<h3>Algoritmo voraz</h3>
+<p>(en grafos.m, paquete para Mathematica 4.0: ViajanteBajo[G])</p>
+<p>1.- Seleccionar cualquier vértice de G para formar el ciclo hamiltoniano.</p>
+<p>2.- Buscar de entre todas las aristas incidentes en el vértice seleccionado, la de menor peso.</p>
+<p>3.- Añadir el nuevo vértice al ciclo hamiltoniano.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.- Si el número de vértices del ciclo coincide con el número de vértices del grafo, Fin.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.- Si el número de vértices del ciclo es menor al número de vértices del grafo, volver a 2.</p>
+<h2>Ciclo hamiltoniano de 'mínimo' peso</h2>
+<h3>Algoritmo por fuerza bruta</h3>
+<p>1.- Buscar todos los ciclos hamiltonianos posibles en el grafo</p>
+<p>2.- Obtener el peso de cada uno de los ciclos</p>
+<p>3.- Devolver el ciclo hamiltoniano de mínimo peso</p>
+<p>&nbsp;</p>
+</body>
+</html>

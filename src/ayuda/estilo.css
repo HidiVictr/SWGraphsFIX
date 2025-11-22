@@ -1,0 +1,14 @@
+body {
+
+	/* background-color: #FFFFF0; */
+	background-color: #FFFFFF;
+	color: #666666;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+}
+.subrayado {
+	text-decoration: underline;
+}
+.subindice {
+	font-size: 9pt;
+}

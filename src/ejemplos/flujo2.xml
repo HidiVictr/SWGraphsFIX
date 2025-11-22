@@ -1,0 +1,68 @@
+<?xml version="1.0" standalone="yes" ?>
+<grafo>
+<tipoGrafo> "1" </tipoGrafo>
+<nodos><nodo>
+<nombre> "s" </nombre>
+<posicion> (80,157) </posicion>
+</nodo>
+<nodo>
+<nombre> "u" </nombre>
+<posicion> (195,78) </posicion>
+</nodo>
+<nodo>
+<nombre> "w" </nombre>
+<posicion> (261,256) </posicion>
+</nodo>
+<nodo>
+<nombre> "v" </nombre>
+<posicion> (360,101) </posicion>
+</nodo>
+<nodo>
+<nombre> "t" </nombre>
+<posicion> (446,196) </posicion>
+</nodo>
+</nodos>
+<aristas><arista>
+<nodo1> "0" </nodo1>
+<nodo2> "1" </nodo2>
+<peso> "6.0" </peso>
+<tipo> "1" </tipo>
+</arista>
+<arista>
+<nodo1> "1" </nodo1>
+<nodo2> "3" </nodo2>
+<peso> "7.0" </peso>
+<tipo> "1" </tipo>
+</arista>
+<arista>
+<nodo1> "3" </nodo1>
+<nodo2> "4" </nodo2>
+<peso> "5.0" </peso>
+<tipo> "1" </tipo>
+</arista>
+<arista>
+<nodo1> "0" </nodo1>
+<nodo2> "2" </nodo2>
+<peso> "6.0" </peso>
+<tipo> "1" </tipo>
+</arista>
+<arista>
+<nodo1> "1" </nodo1>
+<nodo2> "2" </nodo2>
+<peso> "3.0" </peso>
+<tipo> "1" </tipo>
+</arista>
+<arista>
+<nodo1> "3" </nodo1>
+<nodo2> "2" </nodo2>
+<peso> "6.0" </peso>
+<tipo> "1" </tipo>
+</arista>
+<arista>
+<nodo1> "2" </nodo1>
+<nodo2> "4" </nodo2>
+<peso> "8.0" </peso>
+<tipo> "1" </tipo>
+</arista>
+</aristas> 
+ </grafo>

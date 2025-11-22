@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="estilo.css" rel="stylesheet" type="text/css" />
+<title>Matriz de Adyacencia</title>
+</head>
+
+<body>
+<h1>Matriz del grafo</h1>
+<h2>1.- Matriz de adyacencia</h2>
+<p>Llamamos matriz de adyacencia de G=(V,E) a la matriz nxn,  A=(a<span class="subindice">ij</span>), donde:</p>
+<p><img src="img/matady.png" alt="ady" width="174" height="54" /></p>
+<p class="subrayado">Ejemplo:</p>
+<p><img src="img/mat_ady.jpg" alt="grafo" /><img src="img/ady9.png" alt="matriz" width="185" height="133" /></p>
+<h2>2.- Matriz de acceso</h2>
+<p>Mirar la ayuda del algoritmo BFS o DFS.</p>
+<h2>3.- Matriz de pesos</h2>
+<p>Este diálogo le permite modificar la matriz de pesos del grafo para así etiquetar de forma rápida un gran número de aristas/arcos. El peso debe ser un valor numérico.</p>
+<h3>¿Cómo utilizo la matriz de pesos?</h3>
+<p>Utilizar la matriz de pesos es muy sencillo, para etiquetar una arista/arco (i,j) basta con situarse en la celda intersección entre la fila i y la columna j, y poner en esta posición el valor deseado para el peso de la arista/arco.</p>
+<p>Para validar este nuevo valor basta con seleccionar una nueva celda de la matriz o pulsar la tecla intro, lo que automáticamente guarda el cambio realizado.</p>
+<p>Al cerrar la ventana las actualizaciones se trasladan al dibujo del grafo.</p>
+<p>Etiquetar una arista/arco con peso 0.0 equivale a su borrado.</p>
+<p><strong>Grafos No Dirigidos</strong></p>
+<p>Si estamos dibujando un grafo no dirigido y queremos modificar el peso de una arista, tenemos que tener en cuenta que si modificamos el valor (i,j) automáticamente se actualiza con el mismo valor la casilla (j,i).</p>
+<p><strong>Grafos Dirigidos</strong></p>
+<p>Cada posición de la matriz de adyacencia corresponde con un arco del grafo, por lo que al modificar el peso de la casilla (i,j), no se modificará de forma automática ninguna otra.</p>
+<h2>4.- Matriz de multiplicidades (Hierholzer)</h2>
+<p>Llamamos matriz de multiplicidades de G a la matriz nxn,  A=(a<span class="subindice">ij</span>), donde cada valor indica el número de aristas (arcos) que van desde el nodo i al nodo j.</p>
+<p>Esta matriz se utiliza en el algoritmo de Hierholzer para especificar los <span class="subrayado">s-grafos</span>.</p>
+<p>Para introducir una matriz de multiplicidades se rellena la matriz del grafo (menú superior) y cuando se selecciona algoritmo de Hierholzer la matriz pasa automáticamente a considerarse matriz de multiplicidades.</p>
+<h2>5.- Matriz de capacidades (Flujo máximo)</h2>
+<p>Llamamos matriz de capacidades de G a la matriz nxn,  A=(a<span class="subindice">ij</span>), donde cada valor indica la capacidad  de la arista (arco) que va desde el nodo i al nodo j.</p>
+<p>Esta matriz se utiliza en el algoritmo del flujo máximo para especificar la función capacidad asociada al grafo dibujado.</p>
+<p>Para introducir una matriz de capacidades se rellena la matriz del grafo (menú superior) y cuando se selecciona algoritmo de Ford Fulkerson la matriz pasa automáticamente a considerarse matriz de capacidades.</p>
+<h2>&nbsp;</h2>
+</body>
+</html>

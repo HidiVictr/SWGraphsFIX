@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="estilo.css" rel="stylesheet" type="text/css" />
+<title>Documento sin t&iacute;tulo</title>
+</head>
+
+<body>
+<h1>Algoritmo de Ford-Fulkerson </h1>
+<h3>Restricciones:</h3>
+<p>Este algoritmo sólo se puede aplicar a grafos  dirigidos débil conexos.</p>
+<h2>Conceptos básicos</h2>
+<p>Una red N(G,s,t,c) es una cuaterna definida de la siguiente forma: </p>
+<h4>Red N(G,s,t,c)</h4>
+<p>donde:</p>
+<p> G -&gt; Grafo dirigido débil conexo</p>
+<p>s -&gt; vértice de G tal que su grado de salida sea mayor que 0 (vértice fuente)</p>
+<p>t -&gt; vértice de G tal que su grado de entrada sea mayor que 0 (vértice sumidero)</p>
+<p>c -&gt; función c: E(G) -&gt; N U {0} (función capacidad)</p>
+<p class="subrayado">Ejemplo:</p>
+<p><img src="img/redes_t3.png" alt="red" width="443" height="210" /><br />
+</p>
+<h4>FLUJO f EN N(G,s,t,c)</h4>
+<p>Se llama <strong>flujo</strong> f <strong>en</strong> N a una función f: E(G) -&gt; N U {0} que verifica las siguientes condiciones: </p>
+<p>a) <img src="img/paratot.png" alt="p" width="21" height="22" />e<img src="img/pertenece.png" alt="pertenece" width="18" height="16" />E(G) <img src="img/limitacion_capacidad.jpg" alt="limitacion" width="153" height="18" /> (limitación por capacidad) </p>
+<p>b) <img src="img/paratot.png" alt="p" width="21" height="22" />u<img src="img/pertenece.png" alt="pertenece" width="18" height="16" />V-{s,t}</p>
+<p> <img src="img/conserv.jpg" alt="conservacion" width="282" height="48" /> </p>
+<p>(ecuación de conservación) </p>
+<p class="subrayado">Propiedad:</p>
+<p>Así como la capacidad es una característica de cada red, el flujo no lo es, y un flujo dado puede ser modificado. El flujo más sencillo es f(e) = 0 para todo e que pertenece a E(G). </p>
+<p>Y otro nuevo concepto, flujo de la red. No lo confundas con el anterior. </p>
+<h4>FLUJO &quot;DE&quot; LA RED</h4>
+<p>Dada la red N(G,s,t,c) se llama <strong>flujo de la red</strong> al valor f(N) definido como </p>
+<p class="subrayado"><img src="img/flujo_de_fte.jpg" alt="flujo" width="348" height="44" /></p>
+<p><span class="subrayado">Propiedad:</span><br />
+  <br />
+Se comprueba que</p>
+<p><img src="img/flujo_de_sum.jpg" alt="flujo_sum" width="353" height="42" /></p>
+<p><strong><em>Nota. </em></strong>El flujo, f, representa lo que se transporta en la red.</p>
+<h4>GRAFO RESIDUO DE G</h4>
+<p>Grafo Gr = (Vr, Er) con Vr ) V, Er = E U {(u,v)  E} y función asociada r: Er --&gt; N U {0} donde</p>
+<p><img src="img/residuo.png" alt="residuo" width="204" height="52" /></p>
+<h4>CAMINO F-INCREMENTABLE EN Gr</h4>
+<p>Se llama <strong>camino f-incrementable</strong> de s a t, a todo camino P de s a t en el grafo residuo Gr que verifique r(e) &gt; 0.</p>
+<p>Se denota <img src="img/gr2res.png" alt="gr2res" width="203" height="31" /></p>
+<p><strong>Nota</strong>. Observa que los caminos que hemos utilizado para localizar en Gr el flujo máximo se llama f-incrementable.</p>
+<p><strong>Teorema</strong></p>
+<p>Sea f flujo en la red N(G,s,t,c)</p>
+<p>f es flujo máximo en N &lt;-&gt; No existe camino f-incrementable </p>
+<h3>Algoritmo de Ford-Fulkerson</h3>
+<p>inicializar flujo f=0;</p>
+<p>construir grafo residual Gf asociado a f&nbsp;=&nbsp;0;</p>
+<p>maxflow&nbsp;=&nbsp;0;</p>
+<p>while (existe camino de aumento de s a t en Gf) {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;delta = menor capacidad del camino de aumento;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;maxflow += delta;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;para cada arista (u,v) del camino de aumento hacer {</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c_f(u,v) -= delta;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c_f(v,u) += delta;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+<p>}</p>
+<p>return maxflow;</p>
+<p>&nbsp;</p>
+</body>
+</html>

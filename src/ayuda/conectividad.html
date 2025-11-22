@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="estilo.css" rel="stylesheet" type="text/css" />
+<title>Documento sin t&iacute;tulo</title>
+</head>
+
+<body>
+<h2>Grafos conexos</h2>
+<p><em>(para grafos no dirigidos)</em></p>
+<p>Un grafo no dirigido G es conexo si todos los vértices se alcanzan mutuamente.</p>
+<p><strong>Caracterización:</strong> G es conexo si y sólo si su matriz de acceso está formada  sólo por 1's.</p>
+<p>Se llama componente conexa de G a todo subgrafo conexo tal que no exista otro subgrafo conexo que lo contenga estrictamente.</p>
+<p>Sea un grafo G=(V,E),</p>
+<p>Dado un vértice  v de G denotamos con <strong>G-v</strong> el subgrafo de G cuyo conjunto de vértices es el resultado de eliminar de V el vértice v y cuyo conjunto de aristas se obtiene suprimiendo de E las aristas incidentes en v.</p>
+<p> Dada una arista e de G denotamos con <strong>G-e</strong> el subgrafo de G cuyo conjunto de vértices es V y cuyo conjunto de aristas se obtiene aristas se obtiene suprimiendo de E la arista e.</p>
+<p>Sea G un grafo no dirigido,</p>
+<p>Un vértice v de G se dice que es <strong>vértice de corte</strong> si el número de componentes del grafo G-v es estrictamente mayor que el número de componentes de G.</p>
+<p>Una arista e de G  se dice que es <strong>arista de corte o puente</strong> si el número de componentes del grafo G-e es estrictamente mayor que el número de componentes de G.</p>
+<h2>Grafos fuertemente conexos</h2>
+<p><em>(para grafos dirigidos)</em></p>
+<p>Un grafo dirigido G es fuertemente conexo si todos los vértices se alcanzan mutuamente.</p>
+<p><strong>Caracterización:</strong> G es fuertemente conexo si y sólo si su matriz de acceso  está formada sólo por 1's.</p>
+<p>Se llama componente fuertemente conexa de G a todo subgrafo fuertemente conexo tal que no exista otro subgrafo fuertemente conexo que lo contenga estrictamente.</p>
+<h2>Grafo débilmente conexo</h2>
+<p><em>(para grafos dirigidos)</em></p>
+<p>Sea G= (V,E) grafo dirigido.</p>
+<p>Se dice que un grafo es débilmente conexo si su grafo subyacente G' es conexo.</p>
+<p>Se llama componente débilmente conexa de G a todo subgrafo tal que su subyacente sea una componente conexa en G.</p>
+<h4>Grafo subyacente de un grafo dirigido</h4>
+<p>El grafo subyacente del grafo dirigido G, es el grafo no dirigido obtenido al sustituir cada arco (u,v) por una arista (u,v).</p>
+<p>&nbsp;</p>
+</body>
+</html>

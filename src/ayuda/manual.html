@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="estilo.css" rel="stylesheet" type="text/css" />
+<title>Ayuda</title>
+</head>
+
+<body>
+
+<h1>Manual de usuario</h1>
+<p>La aplicación <span class="subrayado">SWGraphs</span> está dividida en las siguientes secciones que posteriormente se detallan.</p>
+<ul>
+  <li>Barra de botones</li>
+  <li>Barra de menús</li>
+  <li>Panel de información</li>
+  <li>Panel de grafos</li>
+  <li>Barra de estado</li>
+</ul>
+<h2>Barra de botones</h2>
+<h3>Botones para manejo de información</h3>
+<p><img src="../interfaz/img/2open.png" alt="abrir" width="25" height="25" />&nbsp;&nbsp;<strong>ABRIR:</strong> Abre uno de los grafos guardados en XML.</p>
+<p><img src="../interfaz/img/2save.png" alt="guardar" width="25" height="25" />&nbsp;&nbsp;<strong>GUARDAR:</strong> Guarda el grafo actual en un archivo XML, lo que permitirá acceder al grafo en otro momento.</p>
+<h3>Botones para ejecutar los algoritmos</h3>
+<p><img src="../interfaz/img/2play.png" alt="ejecutar" width="25" height="25" />&nbsp;&nbsp;<strong>EJECUTAR:</strong> Ejecuta el algoritmo seleccionado.</p>
+<p><img src="../interfaz/img/2pasos.png" alt="porpasos" width="25" height="25" />&nbsp;&nbsp;<strong>POR PASOS:</strong> Permite ejecutar el algoritmo paso a paso (sólo disponible para los algoritmos Edmonds2 y Cartero Chino).</p>
+<h3>Botones para introducción de datos</h3>
+<p><img src="../interfaz/img/2k.png" alt="k-grafo" width="25" height="25" />&nbsp;&nbsp;<strong>K:</strong> Dibuja un grafo completo con el número de nodos que se indique, elimina cualquier grafo que hubiera anteriormente en el panel.</p>
+<p><img src="../interfaz/img/2matriz.png" alt="matriz" width="25" height="25" />&nbsp;&nbsp;<strong>MATRIZ ADYACENCIA:</strong> Abre un diálogo en el que se muestra la matriz de pesos del grafo. Si no hay ningún grafo dibujado, se pregunta el número de nodos que tendrá el grafo a definir y permite crear el grafo a partir de los pesos que introduzca el usuario en la matriz de pesos.</p>
+<p><img src="../interfaz/img/2limpia.png" alt="limpia" width="25" height="25" />&nbsp;&nbsp;<strong>BORRAR PANELES:</strong> Limpia por completo el panel de grafos, eliminando todos los nodos y aristas, así como, el panel de información.</p>
+<h3>Botones para introducción de datos</h3>
+<p><img src="../interfaz/img/2ayuda.png" alt="ayuda" width="25" height="25" />&nbsp;&nbsp;<strong>AYUDA:</strong> Abre en una ventana nueva el manual de usuario de la aplicación.</p>
+<h2>Opciones de menú</h2>
+<h3 class="subrayado">Menú Archivo</h3>
+<p><strong>ABRIR:</strong> (ver botón Abrir)</p>
+<p><strong>GUARDAR:</strong> (ver botón Guardar)</p>
+<p><strong>DEFINIR FONDO:</strong> Esta opción permite al usuario escoger una imagen de fondo para el panel de grafos. Esta utilidad permite dibujar el grafo sobre un fondo que represente el problema real a analizar mediante la teoría de grafos.</p>
+<p><strong>BORRAR FONDO:</strong> Elimina la imagen de fondo que se haya establecido con anterioridad.</p>
+<p><strong>SALIR:</strong> Permite salir de la aplicación, previa confirmación.</p>
+<h3 class="subrayado">Menú Grafo</h3>
+<p><strong>GRADO DE LOS VÉRTICES:</strong> Para los grafos no dirigidos se muestra el grado de cada uno de los vértices del grafo. Para los grafos dirigidos, se muestra el grado de entrada y el grado de salida de cada uno de los vértices del grafo.</p>
+<p>NOTA: En el caso de tener seleccionado el algoritmo de Hierholzer, el grado de los vértices del s-grafo se calcula a partir de la matriz de multiplicidades. Recuérdese  que para que la matriz introducida sea de multiplicidades debe estar  seleccionado el mencionado algoritmo de Hierholzer.</p>
+<p><strong>GRAFO SUBYACENTE:</strong> Permite obtener el grafo subyacente del grafo dibujado en el panel de grafos.<span class="subrayado"></span></p>
+<p><strong>¿ES CONEXO?:</strong> (disponible para <span class="subrayado">grafos no dirigidos</span>) Indica si un grafo es conexo o no lo es. (ver Ayuda - Grafos - Conectividad de grafos)</p>
+<p><strong>¿ES FUERTEMENTE CONEXO?:</strong> (disponible para <span class="subrayado">grafos dirigidos</span>) Indica si un grafo es fuertemente conexo o no lo es. (ver Ayuda - Grafos - Conectividad de grafos)</p>
+<p><strong>¿ES DÉBILMENTE CONEXO?:</strong> (disponible para <span class="subrayado">grafos dirigidos</span>) Indica si un grafo es débilmente conexo o no lo es. (ver Ayuda - Grafos - Conectividad de grafos)</p>
+<p><strong><img src="../interfaz/img/2k.png" alt="k-grafo" width="25" height="25" />&nbsp;&nbsp;GENERAR GRAFO COMPLETO:</strong> (ver botón K)</p>
+<p><strong><img src="../interfaz/img/2matriz.png" alt="matriz" width="25" height="25" />&nbsp;&nbsp;OBTENER MATRIZ DE ADYACENCIA:</strong> (ver botón Matriz Adyacencia)</p>
+<p><img src="../interfaz/img/2mathematica.png" alt="mathematica" width="25" height="25" />&nbsp;&nbsp;<strong>MATHEMATICA 4.0:</strong> Genera el código del grafo en Mathematica 4.0 (con el módulo grafos.m) de forma que un grafo dibujado en esta aplicación puede portarse a Mathematica simplemente copiando y pegando.</p>
+<h3 class="subrayado">Menú Algoritmos</h3>
+<p><strong>EJECTUAR:</strong> (ver botón Ejecutar)</p>
+<p><strong>POR PASOS:</strong> (ver botón Por pasos...)</p>
+<p><strong>BFS, DFS, DIJKSTRA, ...:</strong> Selecciona el algoritmo que se desea ejecutar sobre el grafo introducido.</p>
+<h3 class="subrayado">Menú Ejemplos</h3>
+<p><strong>BFS, DFS, DIJKSTRA, ...:</strong> Selecciona el algoritmo del que se desea obtener un grafo de ejemplo y escoger el deseado de los grafos disponibles.</p>
+<h3 class="subrayado">Menú Ayuda</h3>
+<p><strong>MANUAL DE USUARIO:</strong> (ver botón Ayuda)</p>
+<p><strong>GRAFOS - Matriz del grafo:</strong> Muestra la información acerca de las diferentes matrices del grafo (matriz de adyacencia, de pesos, de multiplicidades, ...)</p>
+<p><strong>GRAFOS - Conectividad de grafos:</strong> Muestra la información relativa a la conectividad de grafos (conexo, no conexo, fuertemente conexo, ...)</p>
+<p><strong>ALGORITMOS:</strong> Se detalla toda la teoría de grafos necesaria para entender que hace cada uno de los algoritmos programados en este programa.</p>
+<p><strong>ACERCA DE:</strong> Información general de la aplicación SWGraphs.</p>
+<h2>Paneles</h2>
+<p><strong>PANEL DE DIBUJO:</strong> Es el panel en el cual se dibuja el grafo. Si desea dibujar un grafo no dirigido, sólo puede dibujar aristas, no arcos. Si desea dibujar un grafo dirigido, sólo puede dibujar arcos (aparece una flecha en lugar de una línea) y no podrá dibujar aristas. Es decir, en un grafo, o sólo hay aristas (líneas entre nodos) o sólo hay arcos (flechas entre nodos).</p>
+<p><strong>SELECCIÓN DEL TIPO DE GRAFO:</strong> Es el panel situado bajo el panel de dibujo, donde se especifica si se desea dibujar un grafo dirigido o no dirigido, así como si se desea dibujar un nodo o un arco/arista.</p>
+<p>NOTA: Si se desea cambiar de tipo de grafo, si se modifica esta opción, el programa le advertirá de que opciones dispone para realizar el cambio de tipo.</p>
+<p><img src="../interfaz/img/2save.png" alt="guardar" width="25" height="25" />&nbsp;&nbsp;<strong>Guardar Grafo Resultado:</strong> Permite guardar el grafo resultado de la ejecución de algunos algoritmos en un archivo XML, lo que permitirá acceder al grafo en otro momento.</p>
+<p><strong>PANEL DE INFORMACIÓN:</strong> Muestra el resultado tras ejecutar cualquiera de los algoritmos disponibles.</p>
+<h2>Acciones del panel de dibujo de grafos</h2>
+<p><strong>¿CÓMO DIBUJO UN NODO?</strong> Verifique que en la botonera inferior esta seleccionada la opción &quot;dibujar NODO&quot;, una vez hecho esto para dibujar un nodo simplemente haga click con el botón izquierdo en el panel de dibujo.</p>
+<p><strong>¿CÓMO DIBUJO UNA ARISTA O UN ARCO?</strong> En este caso la función elegida en la botonera debe ser &quot;dibujar ARISTA&quot; o &quot;dibujar ARCO&quot;. Para dibujar la arista/arco pulse el botón izquierdo del ratón sobre un nodo, mantenga el botón pulsado y arrastre el ratón hacia el otro nodo, suelte el ratón sobre este nodo e inmediatamente aparece una arista/arco uniendo ambos nodos.</p>
+<p><strong>¿CÓMO BORRO UN NODO?</strong> Elija la opción de nodos en la botonera, pulse con el botón derecho sobre el nodo a eliminar y en el menú emergente seleccione la opción &quot;Borrar el nodo&quot;.</p>
+<p><strong>¿CÓMO PUEDO RENOMBRAR UN NODO?</strong> El proceso es similar al de borrado de un nodo, pero en este caso seleccione la opción &quot;Cambiar el nombre&quot; en el menú emergente.</p>
+<p><strong>¿CÓMO MUEVO UN NODO?</strong> Con la opción de nodos seleccionada haga click con el botón izquierdo sobre un nodo y arrástrelo al lugar donde desee situarlo (existe un margen mínimo de distancia entre nodos). Las aristas/arcos incidentes en el nodo se desplazarán adecuadamente.</p>
+<p><strong>¿CÓMO BORRO UNA ARISTA O UN ARCO?</strong> Con la opción aristas/arcos seleccionada pulse con el botón derecho sobre la arista/arco a eliminar y en el menú emergente seleccione la opción &quot;Borrar arista&quot;. NOTA: al intentar borrar un bucle, es posible que la aplicación borre una arista/arco no deseada, se recomienda borrar los bucles desde la matriz de adyacencia.</p>
+<p><strong>¿CÓMO DOY PESO A UNA ARISTA?</strong> Habrá observado que al dibujar una arista por defecto tiene peso 1, el proceso de cambio de peso es similar al de borrado de aristas, pero en este caso seleccione la opción &quot;Cambiar peso de la arista&quot; en el menú emergente. También se pueden cambiar los pesos en la matriz de adyacencia (botón de la barra superior). Mismo proceso para el cambio de peso de un arco. Para más información vaya al menú Ayuda, opción Grafos - Matriz del grafo.</p>
+<p><strong>¿Y SI QUIERO UN ARISTA CON PESO CERO?</strong> Habrá observado que al cambiar el peso de una arista a peso 0, si entra a ver la matriz del grafo, al salir y volver a dibujar el grafo la arista desaparece. Esto  se debe a que el programa entiende que si en la  posición (i,j) de la matriz hay un cero la arista no existe.</p>
+<p><span class="subrayado">IMPORTANTE:</span> Si se desea trabajar con aristas con peso 0, hay que asignarle peso 0.1 ó 0,01 ó ... inferior, es decir, un valor muy pequeño comparado con el rango de valores con el que se esté trabajando.</p>
+<p><strong>¿PORQUÉ NO APARECE EL NODO QUE QUIERO DIBUJAR?</strong> Es posible que no aparezca el nodo si lo esta dibujando muy próximo a uno ya existente, o que tenga seleccionada la opción &quot;dibujar ARISTA&quot; o &quot;dibujar ARCO&quot;.</p>
+<p><strong>Si tenemos un grafo no dirigido y queremos transformar una arista en un arco, ¿hay que picarlo de nuevo?</strong> No, basta con seleccionar grafo dirigido en el desplegable de abajo. El programa nos dará a elegir entre convertirlo en un grafo dirigido conservando los pesos o bien en un grafo dirigido con todos los pesos a unos y ceros (es decir, considerar la  matriz de adyacencia en lugar de la de pesos). Si elegimos esta segunda opción perderemos los pesos por lo que es conveniente guardar previamente el grafo, ya que no se podrá volver atrás.</p>
+<p><strong>Si tenemos un grafo no dirigido y queremos transformar  un arco en una arista, ¿hay que picarlo de nuevo?</strong> No, basta con seleccionar grafo no dirigido en el desplegable de abajo. Obtendremos de esta manera el grafo subyacente.  Hay que tener en cuenta que los pesos se perderán, por lo que se recomienda guardar el grafo original antes de aplicar la transformación.</p>
+<p>&nbsp;</p>
+
+</body>
+</html>

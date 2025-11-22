@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="estilo.css" rel="stylesheet" type="text/css" />
+<title>BFS</title>
+</head>
+
+<body>
+<h1>Algoritmo BFS (Breadth First Search)</h1>
+<h2>Accesibilidad</h2>
+<p>Sea G=(V,E) grafo dirigido o grafo no dirigido:</p>
+<p>Se dice que el vértice u  alcanza al vértice v en G si u=v o existe una cadena de u a v.</p>
+<p>Se entiende por tanto que cada vértice se alcanza a sí mismo.</p>
+<h2>Matriz de Acceso</h2>
+<p>La matriz de acceso de G es la matriz nxn A=a<span class="subindice">ij</span>, donde:</p>
+<p><img src="img/matacceso.png" alt="acceso" width="314" height="47" /></p>
+<p>Todos los elementos de la diagonal principal de la matriz valen 1 (cada vértice se alcanza a sí mismo).</p>
+<h2>¿Cómo se obtiene la matriz de acceso?</h2>
+<p>Sea G=(V,E) grafo</p>
+<p>La matriz de acceso de G se puede obtener a partir de la aplicación reiterada de los conocidos métodos:</p>
+<ul>
+  <li>Búsqueda en anchura (BFS)</li>
+  <li>Búsqueda en profundidad (DFS)</li>
+</ul>
+<p>Concretamente, cada una de las filas, i, i = 1, 2, .... , n, de la matriz de acceso se obtiene por aplicación de uno de los dos métodos mencionados al vértice v<span class="subindice">i</span>. En el caso de grafos no dirigidos, dado que si u alcanza a v entonces v  alcanza a u, bastará con: aplicar el algoritmo a un vértice cualquiera y  después ir aplicando reiteradamente el algoritmo a vértices que no hayan  aparecido como alcanzados en iteraciones anteriores.</p>
+<p>Los algoritmos sirven tanto para <strong>grafos dirigidos</strong> como <strong>grafos no dirigidos</strong>.</p>
+<h2>Algoritmo de Búsqueda en anchura</h2>
+<p>Sea G=(V,E) grafo. Considera un vértice de G, v.</p>
+<p>1. Crea dos listas vacías L y A, y una cola vacía Q.</p>
+<p>2. Elige un vértice v, añádelo a L y añade a la cola Q todos los v’ tal que (v, v’) existe en E </p>
+<p>3. Elimina de Q su primer elemento w, añádelo a L (al final) y añade a Q todos los vértices w’ tales que (w,w’) existe en E  y que no estén en L ni en Q.</p>
+<p>4. Añade a A una arista (w0 ,w) donde w0  es el primer vértice de L tal que (w0 ,w) existe en E</p>
+<p>5. Repite los pasos 3 y 4 hasta que Q sea vacía. </p>
+<p>&nbsp;</p>
+</body>
+</html>

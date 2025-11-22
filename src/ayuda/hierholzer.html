@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="estilo.css" rel="stylesheet" type="text/css" />
+<title>Documento sin t&iacute;tulo</title>
+</head>
+
+<body>
+<h1>Algoritmo de Hierholzer</h1>
+<h3>Matriz del grafo</h3>
+<p>La matriz del grafo, cuando ejecutamos el algoritmo de Hielholzer, es una <span class="subrayado">matriz de multiplicidades</span>, para más información consulta en la ayuda el apartado de Matriz del grafo.</p>
+<h2>S-Grafo</h2>
+<p>G=(V,E) es un s-grafo si es un multigrafo donde el 
+  mayor número de aristas (respectivamente arcos) entre
+dos vértices es s.</p>
+<p>NOTA: Un  multigrafo es un grafo en el que se admiten aristas/arcos múltiples entre dos  vértices dados.</p>
+<p class="subrayado">Ejemplos:</p>
+<p><img src="img/sgrafos.png" alt="sgrafo" width="530" height="261" /></p>
+<h2>Cadenas y ciclos eulerianos</h2>
+<p>
+Sea G=(V,E) un s-grafo:</p>
+<p>Se llama <span class="subrayado">cadena euleriana</span> en G a toda cadena en G que pase por todas y cada una de sus aristas (respectivamente arcos) una sola vez.</p>
+<p>Se llama <span class="subrayado">ciclo euleriano</span> en G a toda cadena euleriana cerrada.</p>
+<p>Un grafo G se dice que es euleriano si posee un ciclo euleriano.</p>
+<h3>GRAFOS NO DIRIGIDOS</h3>
+<p>Sea G un s-grafo no dirigido, conexo:</p>
+<p>G es euleriano si y sólo si todos los vértices tienen grado par.</p>
+<p>G tiene cadena euleriana no cerrada si y sólo si G tiene exactamente dos vértices de grado impar (que serán los extremos de la cadena).</p>
+<p class="subrayado">Teorema:</p>
+<p>Sea G un s-grafo no dirigido, conexo:</p>
+<p>G es euleriano si y sólo si se puede expresar como unión de ciclos aristodisjuntos.</p>
+<h3>GRAFOS DIRIGIDOS</h3>
+<p>Sea G un s-grafo dirigido, débil conexo:</p>
+<p>G es euleriano si y sólo si todos los vértices tienen el mismo grado de entrada que de salida.</p>
+<p>G tiene cadena euleriana no cerrada si y sólo si existen dos vértices u y v tal que</p>
+<p>a) d<span class="subindice">e</span>(u) = d<span class="subindice">s</span>(u) + 1 y d<span class="subindice">s</span>(v) = d<span class="subindice">e</span>(v) + 1 y</p>
+<p> b) todos los vértices distintos de u y de v tienen el mismo grado de entrada y salida.</p>
+<h3>Hierholzer:</h3>
+<p>Sea G un s-grafo dirigido, débil conexo:</p>
+<p>G es euleriano si y sólo si se puede expresar como unión de ciclos aristodisjuntos.</p>
+<p>Para obtener un ciclo  euleriano tanto en grafos no dirigidos como en grafos dirigidos, podemos utilizar diferentes algoritmos. En esta aplicación,  se ha implementado el algoritmo de Hierholzer. </p>
+<h2>Algoritmo de Hierholzer (1873)</h2>
+<p>Válido tanto para grafos dirigidos como no dirigidos.</p>
+<p>1.- Se fija un vértice v y se busca un ciclo en el que esté contenido. Para ello se construye una cadena a partir de v añadiendo 
+  aristas/arcos hasta que volvamos a v otra vez. (Ninguna arista/arco se puede añadir más de una vez) <br />
+Si no quedan más aristas/arcos hemos terminado.</p>
+<p>2.- Si quedan más, tomamos un vértice del ciclo existente que sea adyacente a aristas/arcos no considerados, por ejemplo w, y seguimos añadiendo aristas/arcos como antes hasta que lleguemos nuevamente a w.</p>
+<p>3.- Las aristas/arcos del ciclo hallado a partir de w se intercalan en el ciclo anterior en la posición que ocupaba w.<br />
+  Si no quedan más aristas/arcos por añadir hemos terminado;<br />
+  si no es así, entonces volver al paso 2.</p>
+  <p>&nbsp;</p>
+</body>
+
+</html>

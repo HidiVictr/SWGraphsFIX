@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SWGraphsFIX:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SWGraphsFIX_jar</output-path>
+    <root id="archive" name="SWGraphsFIX.jar">
+      <element id="module-output" name="SWGraphsFIX" />
+    </root>
+  </artifact>
+</component>
