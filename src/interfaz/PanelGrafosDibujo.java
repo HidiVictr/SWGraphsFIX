@@ -87,7 +87,9 @@ public class PanelGrafosDibujo extends PanelGrafos implements MouseListener, Act
       switch (this.operacion) {
          case 0:
             if (this.nodoSeleccionado != -1 && e.getPoint().distance(this.punto) > 15.0D) {
-               this.getGrafo().cambiarPosicionIndex(this.nodoSeleccionado, e.getPoint());
+               int x = Math.max(10, Math.min(e.getX(), this.getWidth() - 10));
+               int y = Math.max(10, Math.min(e.getY(), this.getHeight() - 10));
+               this.getGrafo().cambiarPosicionIndex(this.nodoSeleccionado, new Point(x, y));
                this.repaint();
             }
             break;
@@ -224,7 +226,9 @@ public class PanelGrafosDibujo extends PanelGrafos implements MouseListener, Act
 
    public void mouseDragged(MouseEvent e) {
       if (this.operacion == 0 && this.nodoSeleccionado != -1) {
-         this.getGrafo().cambiarPosicionIndex(this.nodoSeleccionado, e.getPoint());
+         int x = Math.max(10, Math.min(e.getX(), this.getWidth() - 10));
+         int y = Math.max(10, Math.min(e.getY(), this.getHeight() - 10));
+         this.getGrafo().cambiarPosicionIndex(this.nodoSeleccionado, new Point(x, y));
          this.repaint();
       }
    }
