@@ -13,19 +13,25 @@ import java.awt.geom.Line2D.Double;
 import java.awt.image.ImageObserver;
 import javax.swing.JPanel;
 
-public class PanelGrafos extends JPanel {
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+
+public class PanelGrafos extends JPanel implements MouseWheelListener {
    private static final long serialVersionUID = 1L;
    private Grafo G;
    public Image imagen = null;
+   protected double zoom = 1.0;
 
    public PanelGrafos() {
       this.setVisible(true);
       this.G = new Grafo();
+      this.addMouseWheelListener(this);
       this.repaint();
    }
 
    public PanelGrafos(Grafo arg0) {
       this.setGrafo(arg0);
+      this.addMouseWheelListener(this);
    }
 
    public Grafo getGrafo() {
@@ -36,14 +42,29 @@ public class PanelGrafos extends JPanel {
       this.G = grafo;
    }
 
+   public void mouseWheelMoved(MouseWheelEvent e) {
+      if (e.getWheelRotation() < 0) {
+         this.zoom *= 1.1;
+      } else {
+         this.zoom /= 1.1;
+      }
+      if (this.zoom < 0.1)
+         this.zoom = 0.1;
+      if (this.zoom > 5.0)
+         this.zoom = 5.0;
+      this.repaint();
+   }
+
    protected int obtenerNodoMasCercano(Point p, double umbral) {
       int posicion = -1;
       double distanciaMinima = umbral;
 
       for (int i = 0; i < this.getGrafo().getNodos().size(); ++i) {
          Nodo nodo1 = this.getGrafo().getNodoByIndex(i);
-         double distancia = Math.sqrt((double) ((p.x - nodo1.getPos().x) * (p.x - nodo1.getPos().x)
-               + (p.y - nodo1.getPos().y) * (p.y - nodo1.getPos().y)));
+         Point pNodo = nodo1.getPos();
+         Point pNodoZoom = new Point((int) (pNodo.x * zoom), (int) (pNodo.y * zoom));
+         double distancia = Math.sqrt((double) ((p.x - pNodoZoom.x) * (p.x - pNodoZoom.x)
+               + (p.y - pNodoZoom.y) * (p.y - pNodoZoom.y)));
          if (distancia < distanciaMinima) {
             distanciaMinima = distancia;
             posicion = i;
@@ -75,8 +96,12 @@ public class PanelGrafos extends JPanel {
       Point ptoCola = null;
       Nodo nodoCabeza = this.getGrafo().getNodoByIndex(arista.getCabeza());
       Nodo nodoCola = this.getGrafo().getNodoByIndex(arista.getCola());
-      ptoCabeza = nodoCabeza.getPos();
-      ptoCola = nodoCola.getPos();
+
+      Point rawCabeza = nodoCabeza.getPos();
+      Point rawCola = nodoCola.getPos();
+      ptoCabeza = new Point((int) (rawCabeza.x * zoom), (int) (rawCabeza.y * zoom));
+      ptoCola = new Point((int) (rawCola.x * zoom), (int) (rawCola.y * zoom));
+
       if (ptoCabeza == ptoCola) {
          double dist = Math
                .sqrt(Math.pow((double) (pto.x - ptoCabeza.x), 2.0D) + Math.pow((double) (pto.y - ptoCabeza.y), 2.0D));
@@ -99,6 +124,6 @@ public class PanelGrafos extends JPanel {
       g.setColor(Color.BLACK);
       Graphics2D g2 = (Graphics2D) g;
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-      this.G.pintarGrafo(g);
+      this.G.pintarGrafo(g, zoom);
    }
 }

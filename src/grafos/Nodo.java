@@ -44,7 +44,10 @@ public class Nodo {
    }
 
    public void pintarNodo(Graphics g, Color color) {
-      Point p = this.getPos();
+      this.pintarNodo(g, this.getPos(), color);
+   }
+
+   public void pintarNodo(Graphics g, Point p, Color color) {
       g.setColor(color);
       g.drawOval(p.x, p.y, 12, 12);
       g.setColor(Color.BLUE);
@@ -52,7 +55,10 @@ public class Nodo {
    }
 
    public void pintarNodoRelleno(Graphics g, Color color) {
-      Point p = this.getPos();
+      this.pintarNodoRelleno(g, this.getPos(), color);
+   }
+
+   public void pintarNodoRelleno(Graphics g, Point p, Color color) {
       g.setColor(color);
       g.fillOval(p.x, p.y, 12, 12);
    }

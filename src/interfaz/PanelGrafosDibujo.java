@@ -89,6 +89,9 @@ public class PanelGrafosDibujo extends PanelGrafos implements MouseListener, Act
             if (this.nodoSeleccionado != -1 && e.getPoint().distance(this.punto) > 15.0D) {
                int x = Math.max(10, Math.min(e.getX(), this.getWidth() - 10));
                int y = Math.max(10, Math.min(e.getY(), this.getHeight() - 10));
+               // Apply zoom correction
+               x = (int) (x / this.zoom);
+               y = (int) (y / this.zoom);
                this.getGrafo().cambiarPosicionIndex(this.nodoSeleccionado, new Point(x, y));
                this.repaint();
             }
@@ -171,7 +174,7 @@ public class PanelGrafosDibujo extends PanelGrafos implements MouseListener, Act
          this.getGrafo().getAristas().set(this.aristaSeleccionada, arista);
          this.repaint();
       } catch (NumberFormatException var5) {
-         JOptionPane.showMessageDialog(this, "El peso " + texto + " no es valido.\nDebe ser un n�mero", "ERROR", 0);
+         JOptionPane.showMessageDialog(this, "El peso " + texto + " no es valido.\nDebe ser un nmero", "ERROR", 0);
       } catch (NullPointerException var6) {
       }
 
@@ -179,7 +182,10 @@ public class PanelGrafosDibujo extends PanelGrafos implements MouseListener, Act
 
    private void crearNuevoNodo(Point point) {
       if (this.nodoSeleccionado == -1) {
-         this.getGrafo().insertarNodo(point);
+         // Apply zoom correction for new nodes
+         int x = (int) (point.x / this.zoom);
+         int y = (int) (point.y / this.zoom);
+         this.getGrafo().insertarNodo(new Point(x, y));
          this.repaint();
       }
 
@@ -228,6 +234,9 @@ public class PanelGrafosDibujo extends PanelGrafos implements MouseListener, Act
       if (this.operacion == 0 && this.nodoSeleccionado != -1) {
          int x = Math.max(10, Math.min(e.getX(), this.getWidth() - 10));
          int y = Math.max(10, Math.min(e.getY(), this.getHeight() - 10));
+         // Apply zoom correction
+         x = (int) (x / this.zoom);
+         y = (int) (y / this.zoom);
          this.getGrafo().cambiarPosicionIndex(this.nodoSeleccionado, new Point(x, y));
          this.repaint();
       }
