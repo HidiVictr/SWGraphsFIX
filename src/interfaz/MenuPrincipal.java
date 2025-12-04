@@ -98,6 +98,7 @@ public class MenuPrincipal extends JFrame {
    private JMenuItem grafoCompletoMenuItem;
    private JMenu grafoMenu;
    private JMenuItem ayudaKruskalMenuItem;
+   private JMenuItem deshacerMenuItem;
    private JMenuItem ayudaEtiquetajeMenuItem;
    private JMenuItem ayudaHierholzerMenuItem;
    private JMenuItem ayudaDFSMenuItem;
@@ -600,6 +601,17 @@ public class MenuPrincipal extends JFrame {
       this.salirMenuItem.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent evt) {
             MenuPrincipal.this.salirMenuItemActionPerformed(evt);
+         }
+      });
+
+      this.jMenu1.add(new JSeparator());
+
+      this.deshacerMenuItem = new JMenuItem();
+      this.jMenu1.add(this.deshacerMenuItem);
+      this.deshacerMenuItem.setText("Deshacer");
+      this.deshacerMenuItem.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent evt) {
+            MenuPrincipal.this.panel.deshacer();
          }
       });
       this.ejemplosMenu = new JMenu();

@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
 import java.awt.event.MouseMotionListener;
+import java.util.Stack;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -82,6 +83,19 @@ public class PanelGrafosDibujo extends PanelGrafos
    public void mouseExited(MouseEvent arg0) {
    }
 
+   private Stack<Grafo> undoStack = new Stack<>();
+
+   public void guardarEstado() {
+      this.undoStack.push(this.getGrafo().clonar());
+   }
+
+   public void deshacer() {
+      if (!this.undoStack.isEmpty()) {
+         this.setGrafo(this.undoStack.pop());
+         this.repaint();
+      }
+   }
+
    public void mousePressed(MouseEvent e) {
       this.requestFocusInWindow();
       if (SwingUtilities.isMiddleMouseButton(e) || (this.mPressed && SwingUtilities.isLeftMouseButton(e))) {
@@ -90,6 +104,8 @@ public class PanelGrafosDibujo extends PanelGrafos
       } else if (e.getButton() == 1) {
          this.nodoSeleccionado = this.obtenerNodoMasCercano(e.getPoint(), 20.0D);
          if (this.nodoSeleccionado != -1) {
+            // Save state before potential drag
+            this.guardarEstado();
             Nodo n = this.getGrafo().getNodoByIndex(this.nodoSeleccionado);
             this.punto = n.getPos();
          }
@@ -111,18 +127,34 @@ public class PanelGrafosDibujo extends PanelGrafos
                y = (int) ((y - this.ty) / this.zoom);
                this.getGrafo().cambiarPosicionIndex(this.nodoSeleccionado, new Point(x, y));
                this.repaint();
+            } else if (this.nodoSeleccionado != -1) {
+               // If it wasn't a drag (just a click), pop the state we saved in mousePressed
+               // to avoid accumulating useless states
+               if (!this.undoStack.isEmpty()) {
+                  this.undoStack.pop();
+               }
             }
             break;
          case 1:
-            if (this.nodoSeleccionado != -1 && this.obtenerNodoMasCercano(e.getPoint(), 20.0D) != -1 && this.getGrafo()
-                  .insertarArista(this.obtenerNodoMasCercano(e.getPoint(), 20.0D), this.nodoSeleccionado)) {
-               this.repaint();
+            if (this.nodoSeleccionado != -1 && this.obtenerNodoMasCercano(e.getPoint(), 20.0D) != -1) {
+               this.guardarEstado();
+               if (this.getGrafo().insertarArista(this.obtenerNodoMasCercano(e.getPoint(), 20.0D),
+                     this.nodoSeleccionado)) {
+                  this.repaint();
+               } else {
+                  this.undoStack.pop(); // Revert save if insertion failed
+               }
             }
             break;
          case 2:
-            if (this.nodoSeleccionado != -1 && this.obtenerNodoMasCercano(e.getPoint(), 20.0D) != -1 && this.getGrafo()
-                  .insertarArco(this.nodoSeleccionado, this.obtenerNodoMasCercano(e.getPoint(), 20.0D))) {
-               this.repaint();
+            if (this.nodoSeleccionado != -1 && this.obtenerNodoMasCercano(e.getPoint(), 20.0D) != -1) {
+               this.guardarEstado();
+               if (this.getGrafo().insertarArco(this.nodoSeleccionado,
+                     this.obtenerNodoMasCercano(e.getPoint(), 20.0D))) {
+                  this.repaint();
+               } else {
+                  this.undoStack.pop(); // Revert save if insertion failed
+               }
             }
       }
 
@@ -133,6 +165,7 @@ public class PanelGrafosDibujo extends PanelGrafos
       switch (this.operacion) {
          case 0:
             if (this.nodoSeleccionado != -1 && source.getText() == "Borrar el nodo") {
+               this.guardarEstado();
                this.eliminarNodoSeleccionado();
             } else {
                this.cambiarNombre();
@@ -140,6 +173,7 @@ public class PanelGrafosDibujo extends PanelGrafos
             break;
          case 1:
             if (this.aristaSeleccionada != -1 && source.getText() == "Borrar la arista") {
+               this.guardarEstado();
                this.eliminarAristaSeleccionada();
             } else {
                this.cambiarPeso();
@@ -147,6 +181,7 @@ public class PanelGrafosDibujo extends PanelGrafos
             break;
          case 2:
             if (this.aristaSeleccionada != -1 && source.getText() == "Borrar el arco") {
+               this.guardarEstado();
                this.eliminarAristaSeleccionada();
             } else {
                this.cambiarPeso();
@@ -171,10 +206,14 @@ public class PanelGrafosDibujo extends PanelGrafos
       try {
          if (texto.length() == 0) {
             JOptionPane.showMessageDialog(this, "No se permiten nombres vacios", "ERROR", 0);
-         } else if (this.getGrafo().cambiarNombreIndex(this.nodoSeleccionado, texto)) {
-            this.repaint();
          } else {
-            JOptionPane.showMessageDialog(this, "El nombre ya existe", "ERROR", 0);
+            this.guardarEstado();
+            if (this.getGrafo().cambiarNombreIndex(this.nodoSeleccionado, texto)) {
+               this.repaint();
+            } else {
+               JOptionPane.showMessageDialog(this, "El nombre ya existe", "ERROR", 0);
+               this.undoStack.pop(); // Revert save
+            }
          }
       } catch (NullPointerException var3) {
       }
@@ -186,6 +225,7 @@ public class PanelGrafosDibujo extends PanelGrafos
 
       try {
          double nuevoPeso = Double.parseDouble(texto);
+         this.guardarEstado();
          Arista arista = this.getGrafo().getAristaByIndex(this.aristaSeleccionada);
          arista.setPeso(nuevoPeso);
          this.getGrafo().getAristas().set(this.aristaSeleccionada, arista);
@@ -199,6 +239,7 @@ public class PanelGrafosDibujo extends PanelGrafos
 
    private void crearNuevoNodo(Point point) {
       if (this.nodoSeleccionado == -1) {
+         this.guardarEstado();
          // Apply zoom and translation correction for new nodes
          int x = (int) ((point.x - this.tx) / this.zoom);
          int y = (int) ((point.y - this.ty) / this.zoom);

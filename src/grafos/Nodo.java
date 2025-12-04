@@ -62,4 +62,8 @@ public class Nodo {
       g.setColor(color);
       g.fillOval(p.x, p.y, 12, 12);
    }
+
+   public Nodo clonar() {
+      return new Nodo(this.nombre, new Point(this.posicion));
+   }
 }

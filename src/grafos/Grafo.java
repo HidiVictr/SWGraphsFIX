@@ -99,7 +99,11 @@ public class Grafo {
    public Grafo clonar() {
       Grafo grf_clon = new Grafo();
       grf_clon.tipoGrafo = this.tipoGrafo;
-      grf_clon.nodos = (Vector) this.nodos.clone();
+      // Deep copy of nodes
+      grf_clon.nodos = new Vector<>();
+      for (Nodo n : this.nodos) {
+         grf_clon.nodos.add(n.clonar());
+      }
 
       for (int i = 0; i < this.aristas.size(); ++i) {
          Arista a = (Arista) this.aristas.get(i);
