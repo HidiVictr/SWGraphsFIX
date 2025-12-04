@@ -99,6 +99,7 @@ public class MenuPrincipal extends JFrame {
    private JMenu grafoMenu;
    private JMenuItem ayudaKruskalMenuItem;
    private JMenuItem deshacerMenuItem;
+   private JMenuItem rehacerMenuItem;
    private JMenuItem ayudaEtiquetajeMenuItem;
    private JMenuItem ayudaHierholzerMenuItem;
    private JMenuItem ayudaDFSMenuItem;
@@ -614,6 +615,15 @@ public class MenuPrincipal extends JFrame {
             MenuPrincipal.this.panel.deshacer();
          }
       });
+
+      this.rehacerMenuItem = new JMenuItem();
+      this.jMenu1.add(this.rehacerMenuItem);
+      this.rehacerMenuItem.setText("Rehacer");
+      this.rehacerMenuItem.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent evt) {
+            MenuPrincipal.this.panel.rehacer();
+         }
+      });
       this.ejemplosMenu = new JMenu();
       this.MenuBar.add(this.ejemplosMenu);
       this.ejemplosMenu.setText("Ejemplos   ");
@@ -1050,7 +1060,6 @@ public class MenuPrincipal extends JFrame {
       this.panel.setSize(4000, 4000);
       this.panel.setBackground(Color.WHITE);
       this.panel.setVisible(true);
-      this.panel.addMouseListener(this.panel);
       this.panel.revalidate();
       this.hueco1Panel = new JPanel();
       this.grafoPanel.add(this.hueco1Panel, "North");
@@ -2778,6 +2787,7 @@ public class MenuPrincipal extends JFrame {
       }
 
       this.modificarStatusBar("El algoritmo de " + alg + " ha finalizado correctamente");
+      this.panel.repaint();
    }
 
    public void modificarStatusBar(String mensaje) {

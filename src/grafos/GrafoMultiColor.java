@@ -3,37 +3,52 @@ package grafos;
 import interfaz.matricesAdyacencia.MatrizTabla;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.Vector;
 
 public class GrafoMultiColor extends Grafo {
    public Vector<Arista> deAzul = new Vector();
 
    public void pintarGrafo(Graphics g) {
+      this.pintarGrafo(g, 1.0, 0.0, 0.0);
+   }
+
+   public void pintarGrafo(Graphics g, double zoom, double tx, double ty) {
       if (this != null) {
          int j;
          Nodo n1;
-         for(j = 0; j < this.nodos.size(); ++j) {
-            n1 = (Nodo)this.nodos.get(j);
-            n1.pintarNodo(g, Color.BLACK);
+         for (j = 0; j < this.nodos.size(); ++j) {
+            n1 = (Nodo) this.nodos.get(j);
+            Point p = n1.getPos();
+            Point pZoom = new Point((int) (p.x * zoom + tx), (int) (p.y * zoom + ty));
+            n1.pintarNodo(g, pZoom, Color.BLACK);
          }
 
          Arista arista;
          Nodo n2;
-         for(j = 0; j < this.aristas.size(); ++j) {
-            arista = (Arista)this.aristas.get(j);
+         for (j = 0; j < this.aristas.size(); ++j) {
+            arista = (Arista) this.aristas.get(j);
             if (arista != null) {
                n1 = this.getNodoByIndex(arista.getCabeza());
                n2 = this.getNodoByIndex(arista.getCola());
-               arista.pintarArista(g, n1.getPos(), n2.getPos(), arista.getTipo(), false, Color.BLACK);
+               Point pCabeza = n1.getPos();
+               Point pCola = n2.getPos();
+               Point pCabezaZoom = new Point((int) (pCabeza.x * zoom + tx), (int) (pCabeza.y * zoom + ty));
+               Point pColaZoom = new Point((int) (pCola.x * zoom + tx), (int) (pCola.y * zoom + ty));
+               arista.pintarArista(g, pCabezaZoom, pColaZoom, arista.getTipo(), false, Color.BLACK);
             }
          }
 
-         for(j = 0; j < this.deAzul.size(); ++j) {
-            arista = (Arista)this.deAzul.get(j);
+         for (j = 0; j < this.deAzul.size(); ++j) {
+            arista = (Arista) this.deAzul.get(j);
             if (arista != null) {
                n1 = this.getNodoByIndex(arista.getCabeza());
                n2 = this.getNodoByIndex(arista.getCola());
-               arista.pintarArista(g, n1.getPos(), n2.getPos(), arista.getTipo(), true, Color.BLUE);
+               Point pCabeza = n1.getPos();
+               Point pCola = n2.getPos();
+               Point pCabezaZoom = new Point((int) (pCabeza.x * zoom + tx), (int) (pCabeza.y * zoom + ty));
+               Point pColaZoom = new Point((int) (pCola.x * zoom + tx), (int) (pCola.y * zoom + ty));
+               arista.pintarArista(g, pCabezaZoom, pColaZoom, arista.getTipo(), true, Color.BLUE);
             }
          }
       }
@@ -46,19 +61,19 @@ public class GrafoMultiColor extends Grafo {
       grafoPintar.setTipo(g.getTipo());
 
       int i;
-      for(i = 0; i < g.getNodos().size(); ++i) {
+      for (i = 0; i < g.getNodos().size(); ++i) {
          Nodo n = g.getNodoByIndex(i);
          grafoPintar.insertarNodo(n);
       }
 
-      for(i = 0; i < g.getNodos().size(); ++i) {
+      for (i = 0; i < g.getNodos().size(); ++i) {
          int fin = 0;
          if (grafoPintar.getTipo() == 0) {
             fin = i;
          }
 
-         for(int j = fin; j < g.getNodos().size(); ++j) {
-            Double peso = (Double)matrizGrafoPintar.getValueAt(i, j);
+         for (int j = fin; j < g.getNodos().size(); ++j) {
+            Double peso = (Double) matrizGrafoPintar.getValueAt(i, j);
             if (peso != 0.0D) {
                Arista a;
                if (grafoPintar.getTipo() == 0) {
@@ -80,9 +95,10 @@ public class GrafoMultiColor extends Grafo {
    public boolean existeAristaAzul(Arista a) {
       boolean existeArista = false;
 
-      for(int k = 0; k < this.deAzul.size(); ++k) {
-         Arista arista = (Arista)this.deAzul.get(k);
-         if (arista.getCabeza() == a.getCabeza() && arista.getCola() == a.getCola() || arista.getCabeza() == a.getCola() && arista.getCola() == a.getCabeza()) {
+      for (int k = 0; k < this.deAzul.size(); ++k) {
+         Arista arista = (Arista) this.deAzul.get(k);
+         if (arista.getCabeza() == a.getCabeza() && arista.getCola() == a.getCola()
+               || arista.getCabeza() == a.getCola() && arista.getCola() == a.getCabeza()) {
             existeArista = true;
          }
       }
@@ -93,8 +109,8 @@ public class GrafoMultiColor extends Grafo {
    public boolean existeArcoAzul(Arista a) {
       boolean existeArco = false;
 
-      for(int k = 0; k < this.deAzul.size(); ++k) {
-         Arista arista = (Arista)this.deAzul.get(k);
+      for (int k = 0; k < this.deAzul.size(); ++k) {
+         Arista arista = (Arista) this.deAzul.get(k);
          if (arista.getCabeza() == a.getCabeza() && arista.getCola() == a.getCola()) {
             existeArco = true;
          }
@@ -106,20 +122,20 @@ public class GrafoMultiColor extends Grafo {
    public GrafoMultiColor clonar() {
       GrafoMultiColor grf_clon = new GrafoMultiColor();
       grf_clon.setTipo(this.getTipo());
-      grf_clon.nodos = (Vector)this.nodos.clone();
+      grf_clon.nodos = (Vector) this.nodos.clone();
 
       int j;
       Arista arista;
-      for(j = 0; j < this.aristas.size(); ++j) {
-         arista = (Arista)this.aristas.get(j);
+      for (j = 0; j < this.aristas.size(); ++j) {
+         arista = (Arista) this.aristas.get(j);
          Arista a_clonada = new Arista(arista.getCabeza(), arista.getCola(), arista.getTipo());
          a_clonada.setPeso(arista.getPeso());
          a_clonada.setMultiplicidad(arista.getMultiplicidad());
          grf_clon.aristas.add(a_clonada);
       }
 
-      for(j = 0; j < this.deAzul.size(); ++j) {
-         arista = (Arista)this.deAzul.get(j);
+      for (j = 0; j < this.deAzul.size(); ++j) {
+         arista = (Arista) this.deAzul.get(j);
          grf_clon.deAzul.add(arista);
       }
 

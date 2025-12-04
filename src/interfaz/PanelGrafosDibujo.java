@@ -15,9 +15,16 @@ import javax.swing.JPopupMenu;
 import java.awt.event.MouseMotionListener;
 import java.util.Stack;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import java.awt.Toolkit;
 
 public class PanelGrafosDibujo extends PanelGrafos
       implements MouseListener, ActionListener, MouseMotionListener, KeyListener {
@@ -35,6 +42,7 @@ public class PanelGrafosDibujo extends PanelGrafos
       this.addMouseMotionListener(this);
       this.addKeyListener(this);
       this.setFocusable(true);
+      this.setupShortcuts();
    }
 
    public PanelGrafosDibujo(Grafo arg0) {
@@ -43,6 +51,32 @@ public class PanelGrafosDibujo extends PanelGrafos
       this.addMouseMotionListener(this);
       this.addKeyListener(this);
       this.setFocusable(true);
+      this.setupShortcuts();
+   }
+
+   private void setupShortcuts() {
+      InputMap inputMap = this.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+      ActionMap actionMap = this.getActionMap();
+
+      KeyStroke undoKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+            Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
+      inputMap.put(undoKeyStroke, "undo");
+      actionMap.put("undo", new AbstractAction() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            deshacer();
+         }
+      });
+
+      KeyStroke redoKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_Y,
+            Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
+      inputMap.put(redoKeyStroke, "redo");
+      actionMap.put("redo", new AbstractAction() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            rehacer();
+         }
+      });
    }
 
    public void setOperacion(int op) {
@@ -56,9 +90,10 @@ public class PanelGrafosDibujo extends PanelGrafos
    public void mouseClicked(MouseEvent arg0) {
       if (this.operacion == 0) {
          this.nodoSeleccionado = this.obtenerNodoMasCercano(arg0.getPoint(), 20.0D);
-         if (arg0.getButton() == 1) {
-            this.crearNuevoNodo(arg0.getPoint());
-         }
+         // Node creation moved to mouseReleased for better responsiveness
+         // if (arg0.getButton() == 1) {
+         // this.crearNuevoNodo(arg0.getPoint());
+         // }
 
          if (arg0.getButton() == 3 && this.nodoSeleccionado > -1) {
             this.emergerMenuNodos(arg0.getPoint());
@@ -84,20 +119,59 @@ public class PanelGrafosDibujo extends PanelGrafos
    }
 
    private Stack<Grafo> undoStack = new Stack<>();
+   private Stack<Grafo> redoStack = new Stack<>();
 
    public void guardarEstado() {
-      this.undoStack.push(this.getGrafo().clonar());
-   }
-
-   public void deshacer() {
-      if (!this.undoStack.isEmpty()) {
-         this.setGrafo(this.undoStack.pop());
-         this.repaint();
+      try {
+         System.out.println("Guardando estado... Stack size: " + undoStack.size());
+         this.undoStack.push(this.getGrafo().clonar());
+         this.redoStack.clear(); // New action clears redo history
+      } catch (Exception e) {
+         System.err.println("Error saving state: " + e.getMessage());
+         e.printStackTrace();
       }
    }
 
+   public void deshacer() {
+      System.out.println("Deshaciendo... Stack size: " + undoStack.size());
+      if (!this.undoStack.isEmpty()) {
+         // Save current state to redo stack before undoing
+         this.redoStack.push(this.getGrafo().clonar());
+
+         this.setGrafo(this.undoStack.pop());
+         // Reset selection to avoid stale state issues
+         this.nodoSeleccionado = -1;
+         this.aristaSeleccionada = -1;
+         this.punto = null;
+         this.repaint();
+      } else {
+         System.out.println("Nothing to undo.");
+      }
+   }
+
+   public void rehacer() {
+      System.out.println("Rehaciendo... Redo Stack size: " + redoStack.size());
+      if (!this.redoStack.isEmpty()) {
+         // Save current state to undo stack before redoing
+         this.undoStack.push(this.getGrafo().clonar());
+
+         this.setGrafo(this.redoStack.pop());
+         // Reset selection
+         this.nodoSeleccionado = -1;
+         this.aristaSeleccionada = -1;
+         this.punto = null;
+         this.repaint();
+      } else {
+         System.out.println("Nothing to redo.");
+      }
+   }
+
+   private Point mousePressedPoint;
+
    public void mousePressed(MouseEvent e) {
+      System.out.println("MousePressed: " + e.getPoint());
       this.requestFocusInWindow();
+      this.mousePressedPoint = e.getPoint();
       if (SwingUtilities.isMiddleMouseButton(e) || (this.mPressed && SwingUtilities.isLeftMouseButton(e))) {
          this.lastDragPoint = e.getPoint();
          this.nodoSeleccionado = -1; // Deselect node when panning to prevent accidental drags
@@ -133,6 +207,10 @@ public class PanelGrafosDibujo extends PanelGrafos
                if (!this.undoStack.isEmpty()) {
                   this.undoStack.pop();
                }
+            } else if (SwingUtilities.isLeftMouseButton(e) && !this.mPressed && this.mousePressedPoint != null
+                  && e.getPoint().distance(this.mousePressedPoint) < 5.0D) {
+               // Click on empty space (not a drag, not a pan) -> Create Node
+               this.crearNuevoNodo(e.getPoint());
             }
             break;
          case 1:
