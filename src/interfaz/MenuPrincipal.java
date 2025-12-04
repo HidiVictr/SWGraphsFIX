@@ -219,8 +219,8 @@ public class MenuPrincipal extends JFrame {
    public MenuPrincipal() throws HeadlessException {
       try {
          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-      } catch (Exception var2) {
-         var2.printStackTrace();
+      } catch (Exception e) {
+         e.printStackTrace();
       }
 
       this.panel = new PanelGrafosDibujo();
@@ -332,8 +332,8 @@ public class MenuPrincipal extends JFrame {
          public void actionPerformed(ActionEvent evt) {
             try {
                MenuPrincipal.this.fondoMenuItemActionPerformed(evt);
-            } catch (IOException var3) {
-               var3.printStackTrace();
+            } catch (IOException e) {
+               e.printStackTrace();
             }
 
          }
@@ -1768,8 +1768,8 @@ public class MenuPrincipal extends JFrame {
                      this.ruta = fc.getCurrentDirectory();
                      abrirGrafoOK = true;
                   }
-               } catch (FactoryConfigurationError var11) {
-                  var11.printStackTrace();
+               } catch (FactoryConfigurationError e) {
+                  e.printStackTrace();
                }
             } else {
                G = Util.leerGrafo((File) null, grafo);
@@ -2038,8 +2038,8 @@ public class MenuPrincipal extends JFrame {
             this.textoInformacion.append(
                   "\n\nNOTA: Para volver a ejecutar este algoritmo, por favor haga clic en borrar paneles y/o vuelva a abrir o dibujar el grafo");
             this.modificarStatusBarAlgoritmoFin(1);
-         } catch (InterruptedException var3) {
-            var3.printStackTrace();
+         } catch (InterruptedException e) {
+            e.printStackTrace();
          }
       } else {
          JOptionPane.showMessageDialog(this, "Debe escojer una opción para poder ejecutar el algormitmo.",
@@ -2067,8 +2067,8 @@ public class MenuPrincipal extends JFrame {
          this.algCh.step();
          this.algCh.join();
          this.modificarStatusBarAlgoritmoFin(2);
-      } catch (InterruptedException var2) {
-         var2.printStackTrace();
+      } catch (InterruptedException e) {
+         e.printStackTrace();
       }
 
    }
@@ -2428,8 +2428,8 @@ public class MenuPrincipal extends JFrame {
          try {
             this.algEd2.step();
             this.algEd2.join();
-         } catch (InterruptedException var3) {
-            var3.printStackTrace();
+         } catch (InterruptedException e) {
+            e.printStackTrace();
          }
       } else {
          this.errorNoGrafo();
@@ -2469,8 +2469,8 @@ public class MenuPrincipal extends JFrame {
          try {
             this.algCh.step();
             this.algCh.join();
-         } catch (InterruptedException var3) {
-            var3.printStackTrace();
+         } catch (InterruptedException e) {
+            e.printStackTrace();
          }
       } else {
          this.errorNoGrafo();
@@ -2514,7 +2514,7 @@ public class MenuPrincipal extends JFrame {
             } else {
                JOptionPane.showMessageDialog(this, "El valor indicado no es un número de nodos válido", "ERROR", 0);
             }
-         } catch (NumberFormatException var7) {
+         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El valor indicado no es un número de nodos válido", "ERROR", 0);
          }
       }
