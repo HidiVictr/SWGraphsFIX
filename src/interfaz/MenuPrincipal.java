@@ -233,7 +233,7 @@ public class MenuPrincipal extends JFrame {
       this.algCh = null;
       BorderLayout thisLayout = new BorderLayout();
       this.getContentPane().setLayout(thisLayout);
-      this.setSize(1200, 700);
+
       this.construirIGU();
    }
 
@@ -287,16 +287,10 @@ public class MenuPrincipal extends JFrame {
       BorderLayout derPanelLayout = new BorderLayout();
       this.derPanel.setLayout(derPanelLayout);
       Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-      if (d.width <= 800) {
-         this.setSize(800, 567);
-         this.setMinimumSize(new Dimension(800, 467));
-      } else if (d.width < 1200) {
-         this.setSize(1000, 583);
-         this.setMinimumSize(new Dimension(1000, 583));
-      } else {
-         this.setSize(1200, 700);
-         this.setMinimumSize(new Dimension(1200, 700));
-      }
+      int width = (int) (d.width * 0.85);
+      int height = (int) (d.height * 0.85);
+      this.setSize(width, height);
+      this.setLocationRelativeTo(null);
 
       this.MenuBar = new JMenuBar();
       this.setJMenuBar(this.MenuBar);
@@ -2788,6 +2782,7 @@ public class MenuPrincipal extends JFrame {
 
       this.modificarStatusBar("El algoritmo de " + alg + " ha finalizado correctamente");
       this.panel.repaint();
+      this.panelresultados.repaint();
    }
 
    public void modificarStatusBar(String mensaje) {
