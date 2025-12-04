@@ -188,17 +188,21 @@ public class Grafo {
    }
 
    public void pintarGrafo(Graphics g) {
-      this.pintarGrafo(g, 1.0);
+      this.pintarGrafo(g, 1.0, 0.0, 0.0);
    }
 
    public void pintarGrafo(Graphics g, double zoom) {
+      this.pintarGrafo(g, zoom, 0.0, 0.0);
+   }
+
+   public void pintarGrafo(Graphics g, double zoom, double tx, double ty) {
       Arista arista = null;
       if (this != null) {
          int j;
          for (j = 0; j < this.nodos.size(); ++j) {
             Nodo nodo = (Nodo) this.nodos.get(j);
             Point p = nodo.getPos();
-            Point pZoom = new Point((int) (p.x * zoom), (int) (p.y * zoom));
+            Point pZoom = new Point((int) (p.x * zoom + tx), (int) (p.y * zoom + ty));
             nodo.pintarNodo(g, pZoom, Color.BLACK);
          }
 
@@ -209,8 +213,8 @@ public class Grafo {
                Nodo nodoCola = (Nodo) this.nodos.get(arista.getCola());
                Point pCabeza = nodoCabeza.getPos();
                Point pCola = nodoCola.getPos();
-               Point pCabezaZoom = new Point((int) (pCabeza.x * zoom), (int) (pCabeza.y * zoom));
-               Point pColaZoom = new Point((int) (pCola.x * zoom), (int) (pCola.y * zoom));
+               Point pCabezaZoom = new Point((int) (pCabeza.x * zoom + tx), (int) (pCabeza.y * zoom + ty));
+               Point pColaZoom = new Point((int) (pCola.x * zoom + tx), (int) (pCola.y * zoom + ty));
                arista.pintarArista(g, pCabezaZoom, pColaZoom, arista.getTipo(), false, Color.BLACK);
             }
          }

@@ -21,6 +21,8 @@ public class PanelGrafos extends JPanel implements MouseWheelListener {
    private Grafo G;
    public Image imagen = null;
    protected double zoom = 1.0;
+   protected double tx = 0.0;
+   protected double ty = 0.0;
 
    public PanelGrafos() {
       this.setVisible(true);
@@ -43,15 +45,35 @@ public class PanelGrafos extends JPanel implements MouseWheelListener {
    }
 
    public void mouseWheelMoved(MouseWheelEvent e) {
-      if (e.getWheelRotation() < 0) {
-         this.zoom *= 1.1;
-      } else {
-         this.zoom /= 1.1;
-      }
+      double oldZoom = this.zoom;
+      // Use precise wheel rotation for smoother trackpad zooming
+      double rotation = e.getPreciseWheelRotation();
+      double scaleFactor = Math.pow(1.05, -rotation);
+
+      this.zoom *= scaleFactor;
+
       if (this.zoom < 0.1)
          this.zoom = 0.1;
       if (this.zoom > 5.0)
          this.zoom = 5.0;
+
+      // Calculate translation to keep mouse position fixed
+      // mouse = oldModel * oldZoom + oldTx
+      // mouse = newModel * newZoom + newTx
+      // Since model point is same: (mouse - oldTx) / oldZoom = (mouse - newTx) /
+      // newZoom
+
+      double mouseX = e.getX();
+      double mouseY = e.getY();
+
+      // Calculate the point in model coordinates before zoom
+      double modelX = (mouseX - this.tx) / oldZoom;
+      double modelY = (mouseY - this.ty) / oldZoom;
+
+      // Calculate new translation to keep that model point at the same mouse position
+      this.tx = mouseX - (modelX * this.zoom);
+      this.ty = mouseY - (modelY * this.zoom);
+
       this.repaint();
    }
 
@@ -62,7 +84,7 @@ public class PanelGrafos extends JPanel implements MouseWheelListener {
       for (int i = 0; i < this.getGrafo().getNodos().size(); ++i) {
          Nodo nodo1 = this.getGrafo().getNodoByIndex(i);
          Point pNodo = nodo1.getPos();
-         Point pNodoZoom = new Point((int) (pNodo.x * zoom), (int) (pNodo.y * zoom));
+         Point pNodoZoom = new Point((int) (pNodo.x * zoom + tx), (int) (pNodo.y * zoom + ty));
          double distancia = Math.sqrt((double) ((p.x - pNodoZoom.x) * (p.x - pNodoZoom.x)
                + (p.y - pNodoZoom.y) * (p.y - pNodoZoom.y)));
          if (distancia < distanciaMinima) {
@@ -99,8 +121,8 @@ public class PanelGrafos extends JPanel implements MouseWheelListener {
 
       Point rawCabeza = nodoCabeza.getPos();
       Point rawCola = nodoCola.getPos();
-      ptoCabeza = new Point((int) (rawCabeza.x * zoom), (int) (rawCabeza.y * zoom));
-      ptoCola = new Point((int) (rawCola.x * zoom), (int) (rawCola.y * zoom));
+      ptoCabeza = new Point((int) (rawCabeza.x * zoom + tx), (int) (rawCabeza.y * zoom + ty));
+      ptoCola = new Point((int) (rawCola.x * zoom + tx), (int) (rawCola.y * zoom + ty));
 
       if (ptoCabeza == ptoCola) {
          double dist = Math
@@ -124,6 +146,6 @@ public class PanelGrafos extends JPanel implements MouseWheelListener {
       g.setColor(Color.BLACK);
       Graphics2D g2 = (Graphics2D) g;
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-      this.G.pintarGrafo(g, zoom);
+      this.G.pintarGrafo(g, zoom, tx, ty);
    }
 }

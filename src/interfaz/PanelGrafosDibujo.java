@@ -14,23 +14,34 @@ import javax.swing.JPopupMenu;
 
 import java.awt.event.MouseMotionListener;
 
-public class PanelGrafosDibujo extends PanelGrafos implements MouseListener, ActionListener, MouseMotionListener {
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.SwingUtilities;
+
+public class PanelGrafosDibujo extends PanelGrafos
+      implements MouseListener, ActionListener, MouseMotionListener, KeyListener {
    private static final long serialVersionUID = 1L;
    private int operacion = 0;
    private Point punto;
    private int nodoSeleccionado = -1;
    private int aristaSeleccionada = -1;
    private final double umbralDistancia = 20.0D;
+   private Point lastDragPoint;
+   private boolean mPressed = false;
 
    public PanelGrafosDibujo() {
       this.addMouseListener(this);
       this.addMouseMotionListener(this);
+      this.addKeyListener(this);
+      this.setFocusable(true);
    }
 
    public PanelGrafosDibujo(Grafo arg0) {
       super(arg0);
       this.addMouseListener(this);
       this.addMouseMotionListener(this);
+      this.addKeyListener(this);
+      this.setFocusable(true);
    }
 
    public void setOperacion(int op) {
@@ -65,13 +76,18 @@ public class PanelGrafosDibujo extends PanelGrafos implements MouseListener, Act
    }
 
    public void mouseEntered(MouseEvent arg0) {
+      this.requestFocusInWindow();
    }
 
    public void mouseExited(MouseEvent arg0) {
    }
 
    public void mousePressed(MouseEvent e) {
-      if (e.getButton() == 1) {
+      this.requestFocusInWindow();
+      if (SwingUtilities.isMiddleMouseButton(e) || (this.mPressed && SwingUtilities.isLeftMouseButton(e))) {
+         this.lastDragPoint = e.getPoint();
+         this.nodoSeleccionado = -1; // Deselect node when panning to prevent accidental drags
+      } else if (e.getButton() == 1) {
          this.nodoSeleccionado = this.obtenerNodoMasCercano(e.getPoint(), 20.0D);
          if (this.nodoSeleccionado != -1) {
             Nodo n = this.getGrafo().getNodoByIndex(this.nodoSeleccionado);
@@ -84,14 +100,15 @@ public class PanelGrafosDibujo extends PanelGrafos implements MouseListener, Act
    }
 
    public void mouseReleased(MouseEvent e) {
+      this.lastDragPoint = null;
       switch (this.operacion) {
          case 0:
-            if (this.nodoSeleccionado != -1 && e.getPoint().distance(this.punto) > 15.0D) {
+            if (this.nodoSeleccionado != -1 && this.punto != null && e.getPoint().distance(this.punto) > 15.0D) {
                int x = Math.max(10, Math.min(e.getX(), this.getWidth() - 10));
                int y = Math.max(10, Math.min(e.getY(), this.getHeight() - 10));
-               // Apply zoom correction
-               x = (int) (x / this.zoom);
-               y = (int) (y / this.zoom);
+               // Apply zoom and translation correction
+               x = (int) ((x - this.tx) / this.zoom);
+               y = (int) ((y - this.ty) / this.zoom);
                this.getGrafo().cambiarPosicionIndex(this.nodoSeleccionado, new Point(x, y));
                this.repaint();
             }
@@ -182,9 +199,9 @@ public class PanelGrafosDibujo extends PanelGrafos implements MouseListener, Act
 
    private void crearNuevoNodo(Point point) {
       if (this.nodoSeleccionado == -1) {
-         // Apply zoom correction for new nodes
-         int x = (int) (point.x / this.zoom);
-         int y = (int) (point.y / this.zoom);
+         // Apply zoom and translation correction for new nodes
+         int x = (int) ((point.x - this.tx) / this.zoom);
+         int y = (int) ((point.y - this.ty) / this.zoom);
          this.getGrafo().insertarNodo(new Point(x, y));
          this.repaint();
       }
@@ -231,14 +248,39 @@ public class PanelGrafosDibujo extends PanelGrafos implements MouseListener, Act
    }
 
    public void mouseDragged(MouseEvent e) {
-      if (this.operacion == 0 && this.nodoSeleccionado != -1) {
+      if ((SwingUtilities.isMiddleMouseButton(e) || (this.mPressed && SwingUtilities.isLeftMouseButton(e)))
+            && this.lastDragPoint != null) {
+         int dx = e.getX() - this.lastDragPoint.x;
+         int dy = e.getY() - this.lastDragPoint.y;
+         this.tx += dx;
+         this.ty += dy;
+         this.lastDragPoint = e.getPoint();
+         this.repaint();
+      } else if (SwingUtilities.isLeftMouseButton(e) && this.operacion == 0 && this.nodoSeleccionado != -1
+            && !this.mPressed) {
          int x = Math.max(10, Math.min(e.getX(), this.getWidth() - 10));
          int y = Math.max(10, Math.min(e.getY(), this.getHeight() - 10));
-         // Apply zoom correction
-         x = (int) (x / this.zoom);
-         y = (int) (y / this.zoom);
+         // Apply zoom and translation correction
+         x = (int) ((x - this.tx) / this.zoom);
+         y = (int) ((y - this.ty) / this.zoom);
          this.getGrafo().cambiarPosicionIndex(this.nodoSeleccionado, new Point(x, y));
          this.repaint();
+      }
+   }
+
+   public void keyTyped(KeyEvent e) {
+   }
+
+   public void keyPressed(KeyEvent e) {
+      if (e.getKeyCode() == KeyEvent.VK_M) {
+         this.mPressed = true;
+      }
+   }
+
+   public void keyReleased(KeyEvent e) {
+      if (e.getKeyCode() == KeyEvent.VK_M) {
+         this.mPressed = false;
+         this.lastDragPoint = null;
       }
    }
 }
