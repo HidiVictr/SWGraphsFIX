@@ -2,6 +2,18 @@
 
 This project is a Java-based application for creating, visualizing, and analyzing graphs. It provides a graphical interface to draw nodes and edges, and runs various graph algorithms (Dijkstra, Kruskal, Hamilton cycles, etc.).
 
+## ⚠️ Alpha / Experimental Version
+
+This is the first public release of this fork.
+
+**Important Technical Details:**
+* 🛠 **Origin:** This project is a fork created through reverse engineering (decompilation) of the original `v2.2.0` `.jar`.
+* 🤖 **AI-Generated Code:** Significant portions of the reconstruction and new features have been generated using Artificial Intelligence.
+* 🧪 **Status:** The code has **NOT been 100% audited**. It "works", but may contain bugs, unexpected behavior, or instability in edge cases.
+
+---
+**USE AT YOUR OWN RISK.** Not recommended for exams, assignments, or critical coursework.
+
 ## 🏗 System Architecture
 
 The application follows a variation of the **Model-View-Controller (MVC)** pattern.
