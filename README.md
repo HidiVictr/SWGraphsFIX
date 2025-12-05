@@ -14,6 +14,20 @@ This is the first public release of this fork.
 ---
 **USE AT YOUR OWN RISK.** Not recommended for exams, assignments, or critical coursework.
 
+## ⚖️ Credits & Legal Context
+This project is a **fork** and **restoration** of **SWGraphs**, originally created as a Final Degree Project (TFG) at the **Universitat Politècnica de València (UPV)**.
+
+*   **Original Author:** Jose Chamorro Molina
+*   **Director:** Cristina Jordán Lluch
+*   **Original Version:** 2.1.9 (approx. 2010-2012)
+
+**License Status:**
+The original software was distributed without an explicit license (e.g., MIT, GPL). This fork is created for **educational and maintenance purposes** to keep the tool functional on modern systems.
+*   **Rights:** All original rights belong to the original author.
+*   **Modifications:** New features and fixes in this "FIX" branch are contributed by Victor Fernandez Saez.
+
+If you are the original author and wish to discuss this repository, please open an issue.
+
 ## 🏗 System Architecture
 
 The application follows a variation of the **Model-View-Controller (MVC)** pattern.
