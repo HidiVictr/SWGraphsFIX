@@ -1205,7 +1205,7 @@ public class MenuPrincipal extends JFrame {
          }
       });
       this.setIconImage((new ImageIcon(this.getClass().getResource("/interfaz/img/k.png"))).getImage());
-      this.setTitle("SWGraphsFIX v2.1.0");
+      this.setTitle("SWGraphsFIX v2.2.0");
       this.setVisible(true);
       this.textoInformacion.requestFocus();
    }
