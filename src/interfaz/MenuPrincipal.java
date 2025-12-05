@@ -131,6 +131,7 @@ public class MenuPrincipal extends JFrame {
    private JMenuItem kruskal6MenuItem;
    private JMenuItem kruskal7MenuItem;
    private JMenuItem subyacenteMenuItem;
+   private JMenuItem ordenarGrafoMenuItem;
    private JMenuItem desigualdadMenuItem;
    private JMenuItem compConexasMenuItem;
    private JMenuItem compFuerteConexasMenuItem;
@@ -372,6 +373,14 @@ public class MenuPrincipal extends JFrame {
          }
       });
       this.grafoMenu.add(this.subyacenteMenuItem);
+      this.ordenarGrafoMenuItem = new JMenuItem();
+      this.ordenarGrafoMenuItem.setText("Ordenar grafo");
+      this.ordenarGrafoMenuItem.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent evt) {
+            MenuPrincipal.this.ordenarGrafoMenuItemActionPerformed(evt);
+         }
+      });
+      this.grafoMenu.add(this.ordenarGrafoMenuItem);
       this.conexionMenu = new JMenu();
       this.grafoMenu.add(this.conexionMenu);
       this.conexionMenu.setText("Conexión del grafo");
@@ -1399,6 +1408,12 @@ public class MenuPrincipal extends JFrame {
          this.errorNoGrafo();
       }
 
+   }
+
+   private void ordenarGrafoMenuItemActionPerformed(ActionEvent evt) {
+      if (this.panel.getGrafo().getNodos().size() > 0) {
+         new DialogoOrdenarGrafo(this, this.panel.getGrafo()).setVisible(true);
+      }
    }
 
    private void compConexasMenuItemActionPerformed(ActionEvent evt) {
