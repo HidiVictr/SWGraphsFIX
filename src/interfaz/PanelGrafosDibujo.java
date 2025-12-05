@@ -3,6 +3,8 @@ package interfaz;
 import grafos.Arista;
 import grafos.Grafo;
 import grafos.Nodo;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +38,7 @@ public class PanelGrafosDibujo extends PanelGrafos
    private final double umbralDistancia = 20.0D;
    private Point lastDragPoint;
    private boolean mPressed = false;
+   private Point currentDragPoint = null;
 
    public PanelGrafosDibujo() {
       addMouseListener(this);
@@ -235,7 +238,8 @@ public class PanelGrafosDibujo extends PanelGrafos
                }
             }
       }
-
+      currentDragPoint = null;
+      repaint();
    }
 
    public void actionPerformed(ActionEvent e) {
@@ -384,6 +388,9 @@ public class PanelGrafosDibujo extends PanelGrafos
          y = (int) ((y - ty) / zoom);
          getGrafo().cambiarPosicionIndex(nodoSeleccionado, new Point(x, y));
          repaint();
+      } else if (SwingUtilities.isLeftMouseButton(e) && (operacion == 1 || operacion == 2) && nodoSeleccionado != -1) {
+         currentDragPoint = e.getPoint();
+         repaint();
       }
    }
 
@@ -400,6 +407,22 @@ public class PanelGrafosDibujo extends PanelGrafos
       if (e.getKeyCode() == KeyEvent.VK_M) {
          mPressed = false;
          lastDragPoint = null;
+      }
+   }
+
+   @Override
+   public void paintComponent(Graphics g) {
+      super.paintComponent(g);
+      if ((operacion == 1 || operacion == 2) && nodoSeleccionado != -1 && currentDragPoint != null) {
+         Nodo n = getGrafo().getNodoByIndex(nodoSeleccionado);
+         Point p = n.getPos();
+         int cx = (int) (p.x * zoom + tx) + 6;
+         int cy = (int) (p.y * zoom + ty) + 6;
+         double angle = Math.atan2(currentDragPoint.y - cy, currentDragPoint.x - cx);
+         int x1 = (int) (cx + 6 * Math.cos(angle));
+         int y1 = (int) (cy + 6 * Math.sin(angle));
+         g.setColor(Color.BLACK);
+         g.drawLine(x1, y1, currentDragPoint.x, currentDragPoint.y);
       }
    }
 }
