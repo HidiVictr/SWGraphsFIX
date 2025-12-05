@@ -1,0 +1,17 @@
+* [Inicio](Home)
+* [Manual de Usuario](Manual_de_Usuario)
+* [Generalidades](Generalidades)
+* [Matriz de Adyacencia](Matriz_de_Adyacencia)
+
+### Algoritmos
+* [BFS](BFS)
+* [DFS](DFS)
+* [Dijkstra](Dijkstra)
+* [Kruskal](Kruskal)
+* [Conectividad](Conectividad)
+* [Hamiltoniano](Hamiltoniano)
+* [Hierholzer](Hierholzer)
+* [Cartero Chino](Cartero_Chino)
+* [Flujo Máximo](Etiquetaje)
+* [Edmonds](Edmonds2)
+* [Orientabilidad](Orientabilidad)
