@@ -274,7 +274,11 @@ public class MenuPrincipal extends JFrame {
 
          public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            g.drawImage(this.image, 0, 0, this);
+            if (this.image != null) {
+               int x = (this.getWidth() - this.image.getWidth(this)) / 2;
+               int y = (this.getHeight() - this.image.getHeight(this)) / 2;
+               g.drawImage(this.image, x, y, this);
+            }
          }
       };
       this.textoInformacion.setFont(new Font("Verdana", 0, 12));

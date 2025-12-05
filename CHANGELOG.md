@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [v2.2.1] - 2025-12-05
+
+### Added
+- **Graph Layout Algorithms**: Integrated ForceAtlas2, Fruchterman-Reingold, Kamada-Kawai, and Sugiyama algorithms with UI controls.
+- **Documentation**: Comprehensive Wiki covering algorithms and user manual.
+- **Project Tracking**: Added a to-do list for tracking project tasks.
+- **Legal**: Added credits and legal context to README.
+
+### Fixed
+- **Wiki VCS**: Removed unnecessary VCS mapping for the wiki directory.
+
 ## [v2.2.0] - 2025-12-05
 
 ### Added
