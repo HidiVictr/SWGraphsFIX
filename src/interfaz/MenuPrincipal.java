@@ -1923,21 +1923,12 @@ public class MenuPrincipal extends JFrame {
                this.setEnabledGuardarResultadoButton(true);
                break;
             case 6:
-               boolean ejecutado = false;
-               Grafo aux = this.panel.getGrafo().clonar();
-               aux.pasarDePesosAMultiplicidades();
-               if (!aux.esEuleriano()) {
+               if (!this.panel.getGrafo().esEuleriano()) {
                   JOptionPane.showMessageDialog(this,
                         "No se puede ejecutar el algoritmo porque el grafo no es euleriano.\nPor favor, revise el grafo",
                         "Revisar grafo", 2);
                } else {
-                  this.panel.getGrafo().pasarDePesosAMultiplicidades();
                   this.ejecutarAlgoritmoHierholzer();
-                  ejecutado = true;
-               }
-
-               if (ejecutado) {
-                  this.panel.getGrafo().pasarDeMultiplicidadesAPesos();
                }
 
                this.setEnabledGuardarResultadoButton(false);
