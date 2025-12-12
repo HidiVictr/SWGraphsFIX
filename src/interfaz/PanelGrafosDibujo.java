@@ -213,6 +213,7 @@ public class PanelGrafosDibujo extends PanelGrafos
             } else if (SwingUtilities.isLeftMouseButton(e) && !mPressed && mousePressedPoint != null
                   && e.getPoint().distance(mousePressedPoint) < 5.0D) {
                // Click on empty space (not a drag, not a pan) -> Create Node
+               getGrafo().limpiarSolucion();
                crearNuevoNodo(e.getPoint());
             }
             break;
@@ -221,6 +222,7 @@ public class PanelGrafosDibujo extends PanelGrafos
                guardarEstado();
                if (getGrafo().insertarArista(obtenerNodoMasCercano(e.getPoint(), 20.0D),
                      nodoSeleccionado)) {
+                  getGrafo().limpiarSolucion();
                   repaint();
                } else {
                   undoStack.pop(); // Revert save if insertion failed
@@ -232,6 +234,7 @@ public class PanelGrafosDibujo extends PanelGrafos
                guardarEstado();
                if (getGrafo().insertarArco(nodoSeleccionado,
                      obtenerNodoMasCercano(e.getPoint(), 20.0D))) {
+                  getGrafo().limpiarSolucion();
                   repaint();
                } else {
                   undoStack.pop(); // Revert save if insertion failed
@@ -273,11 +276,13 @@ public class PanelGrafosDibujo extends PanelGrafos
    }
 
    private void eliminarAristaSeleccionada() {
+      getGrafo().limpiarSolucion();
       getGrafo().borrarAristaIndex(aristaSeleccionada);
       repaint();
    }
 
    private void eliminarNodoSeleccionado() {
+      getGrafo().limpiarSolucion();
       getGrafo().borrarNodoIndex(nodoSeleccionado);
       repaint();
    }
@@ -291,6 +296,7 @@ public class PanelGrafosDibujo extends PanelGrafos
          } else {
             guardarEstado();
             if (getGrafo().cambiarNombreIndex(nodoSeleccionado, texto)) {
+               getGrafo().limpiarSolucion();
                repaint();
             } else {
                JOptionPane.showMessageDialog(this, "El nombre ya existe", "ERROR", 0);
@@ -311,6 +317,7 @@ public class PanelGrafosDibujo extends PanelGrafos
          Arista arista = getGrafo().getAristaByIndex(aristaSeleccionada);
          arista.setPeso(nuevoPeso);
          getGrafo().getAristas().set(aristaSeleccionada, arista);
+         getGrafo().limpiarSolucion();
          repaint();
       } catch (NumberFormatException ex) {
          JOptionPane.showMessageDialog(this, "El peso " + texto + " no es valido.\nDebe ser un nmero", "ERROR", 0);

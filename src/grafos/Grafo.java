@@ -72,6 +72,10 @@ public class Grafo {
       return this.grafoFlujoMax;
    }
 
+   public void limpiarSolucion() {
+      this.grafoFlujoMax = null;
+   }
+
    public int getTipo() {
       return this.tipoGrafo;
    }

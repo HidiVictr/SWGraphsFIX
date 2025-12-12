@@ -273,12 +273,12 @@ public class MenuPrincipal extends JFrame {
          }
 
          public void paintComponent(Graphics g) {
-            super.paintComponent(g);
             if (this.image != null) {
                int x = (this.getWidth() - this.image.getWidth(this)) / 2;
                int y = (this.getHeight() - this.image.getHeight(this)) / 2;
                g.drawImage(this.image, x, y, this);
             }
+            super.paintComponent(g);
          }
       };
       this.textoInformacion.setFont(new Font("Verdana", 0, 12));
@@ -1859,6 +1859,7 @@ public class MenuPrincipal extends JFrame {
    }
 
    private void ejecutarAlgoritmoContinuo() {
+      this.panel.getGrafo().limpiarSolucion();
       if (this.panel.getGrafo().getNodos().size() > 0) {
          switch (this.getAlgoritmoSeleccionado()) {
             case 1:

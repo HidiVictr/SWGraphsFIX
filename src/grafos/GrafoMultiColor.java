@@ -9,6 +9,12 @@ import java.util.Vector;
 public class GrafoMultiColor extends Grafo {
    public Vector<Arista> deAzul = new Vector<>();
 
+   @Override
+   public void limpiarSolucion() {
+      super.limpiarSolucion();
+      this.deAzul.clear();
+   }
+
    public void pintarGrafo(Graphics g) {
       pintarGrafo(g, 1.0, 0.0, 0.0);
    }
